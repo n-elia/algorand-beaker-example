@@ -15,8 +15,10 @@ from beaker.client import ApplicationClient, LogicException
 from beaker.sandbox import SandboxAccount
 from pyteal import Approve
 
-from test.conftest import logger
-from contract import AlgoBet as App
+from src.test.conftest import logger
+from src.contract import AlgoBet as App
+
+from src.config import current_config as cc
 
 # Block production time
 block_prod_time = 0
@@ -112,8 +114,15 @@ class TestBase:
     def accounts(self):
         """Retrieve sandbox accounts. Accounts are re-listed for each TestBase subclass."""
         # Pop accounts from sandbox accounts
-        sandbox_accounts = sandbox.get_accounts()
-        return sandbox_accounts
+        if cc.TEST_SANDBOX_CONFIG == 'dev':
+            return sandbox.get_accounts()
+        elif cc.TEST_SANDBOX_CONFIG == 'testnet':
+            return sandbox.get_accounts(
+                wallet_name=cc.TEST_SANDBOX_WALLET_NAME,
+                wallet_password=cc.TEST_SANDBOX_WALLET_PASS
+            )
+        else:
+            pytest.exit("Wrong sandbox configuration")
 
     @pytest.fixture(scope="class")
     def get_account(self, accounts) -> Callable[[], SandboxAccount]:
