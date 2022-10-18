@@ -24,7 +24,7 @@ class Config(BaseSettings):
 
     class Config:
         case_sensitive = False
-        env_file = os.getenv('DOT_ENV_FILE', 'src/.env')
+        env_file = os.getenv('DOT_ENV_FILE', './.env')
         env_file_encoding = os.getenv('DOT_ENV_FILE_ENCODING', 'utf-8')
 
 

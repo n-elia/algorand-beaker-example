@@ -6,7 +6,6 @@ from algosdk.atomic_transaction_composer import TransactionWithSigner
 from algosdk.future import transaction
 from beaker import (
     consts,
-    create,
     sandbox,
     opt_in,
     ApplicationStateValue,
@@ -22,45 +21,47 @@ from pyteal import (
     Txn, Div, Minus, If
 )
 
+from config import current_config as cc
+
 # microAlgos minimum fee for transactions
 network_min_trans_fee = Int(1000)
 
 
 # Create an app subclassing `beaker.Application`
 class AlgoBet(Application):
-    """ AlgoBet smart contract definition. """
-
     ###########################################
     # Application State
     ###########################################
 
+    # Store a "manager" account, which will have particular privileges
     manager: Final[ApplicationStateValue] = ApplicationStateValue(
         stack_type=TealType.bytes,
         # Default to the application creator address
-        default=Global.creator_address(),
-        descr="Manager account, which will have particular privileges"
+        default=Global.creator_address()
     )
 
+    # Store the oracle address
     oracle_addr: Final[ApplicationStateValue] = ApplicationStateValue(
         stack_type=TealType.bytes,
         # Default to the application creator address
-        default=Global.creator_address(),
-        descr="Oracle account address"
+        default=Global.creator_address()
     )
 
+    # Store the event result
     event_result: Final[ApplicationStateValue] = ApplicationStateValue(
         stack_type=TealType.uint64,
-        default=Int(99),
-        descr="Event result",
+        default=Int(99)
     )
 
+    # Store the fixed bet amount
     bet_amount: Final[ApplicationStateValue] = ApplicationStateValue(
         stack_type=TealType.uint64,
         # Defaults to 140 milliAlgos
         default=consts.MilliAlgos(140),
-        descr="Fixed bet amount"
+        descr="Fixed bet amount."
     )
 
+    # Store the bet options
     counter_opt_0: Final[ApplicationStateValue] = ApplicationStateValue(
         stack_type=TealType.uint64,
         default=Int(0),
@@ -82,7 +83,7 @@ class AlgoBet(Application):
     stake_amount: Final[ApplicationStateValue] = ApplicationStateValue(
         stack_type=TealType.uint64,
         default=Int(0),
-        descr="Total stake collected with bets deposits"
+        descr="Algos collected with bets"
     )
 
     winning_count: Final[ApplicationStateValue] = ApplicationStateValue(
@@ -132,20 +133,14 @@ class AlgoBet(Application):
     # Administrative Actions
     ###########################################
 
-    @create
-    def create(self,
-               manager_addr: abi.Address,
-               oracle_addr: abi.Address,
-               event_end_unix_timestamp: abi.Uint64,
-               payout_time_window_s: abi.Uint64):
-        """ Create an AlgoBet contract instance, bound to a particular event.
-
-        Args:
-            manager_addr: Address of the account to be set as manager.
-            oracle_addr: Address of the account to be set as oracle.
-            event_end_unix_timestamp: Unix timestamp of event end.
-            payout_time_window_s: Payout time interval, expressed in seconds.
-        """
+    # @create
+    @external
+    def setup(self,
+              manager_addr: abi.Address,
+              oracle_addr: abi.Address,
+              event_end_unix_timestamp: abi.Uint64,
+              payout_time_window_s: abi.Uint64):
+        """ Initialize application state variables at creation time. """
         return Seq(
             self.initialize_application_state(),
             If(manager_addr.get() != Txn.sender(), self.set_manager(manager_addr)),
@@ -160,11 +155,7 @@ class AlgoBet(Application):
     # Authorize only the manager account to request this transaction
     @external(authorize=Authorize.only(addr=oracle_addr))
     def set_event_result(self, opt: abi.Uint64):
-        """ Set the event result. Only the oracle account is authorized to request this transaction.
-
-        Args:
-            opt: Winning option.
-        """
+        """ Set the event result. """
         return Seq(
             Assert(Global.latest_timestamp() >= self.event_timestamp.get(),
                    comment="Event expiry time not reached, yet."),
@@ -210,7 +201,6 @@ class AlgoBet(Application):
 
     @delete(authorize=Authorize.only(manager))
     def delete(self):
-        """ Delete the AlgoBet smart contract instance. """
         return Seq(
             # Assert that the event ended
             Assert(Global.latest_timestamp() >= self.event_timestamp.get(),
@@ -271,12 +261,7 @@ class AlgoBet(Application):
 
     @external(authorize=Authorize.opted_in(app_id=Application.id))
     def bet(self, opt: abi.Uint64, bet_deposit_tx: abi.PaymentTransaction):
-        """ Place a bet.
-
-        Args:
-            opt: Chosen option.
-            bet_deposit_tx: Payment transaction of the bet deposit.
-        """
+        """ Place a bet. """
         return Seq(
             # Check if the event has been closed
             Assert(
@@ -323,7 +308,6 @@ class AlgoBet(Application):
 
     @external
     def payout(self):
-        """ Request the payout. Only works for winning participants. """
         return Seq(
             # Assert that the participant has chosen the winning option
             Assert(
@@ -356,11 +340,22 @@ def demo():
     # Setup of clients and app creation
     ###################################
 
+    def _get_accounts_from_sandbox():
+        if cc.TEST_SANDBOX_CONFIG == 'dev':
+            return sandbox.get_accounts()
+        elif cc.TEST_SANDBOX_CONFIG == 'testnet':
+            return sandbox.get_accounts(
+                wallet_name=cc.TEST_SANDBOX_WALLET_NAME,
+                wallet_password=cc.TEST_SANDBOX_WALLET_PASS
+            )
+        else:
+            raise NameError("Wrong sandbox configuration")
+
     # Get sandbox algod client
     sandbox_client = sandbox.get_algod_client()
 
     # Pop an account from sandbox accounts
-    sandbox_accounts = sandbox.get_accounts()
+    sandbox_accounts = _get_accounts_from_sandbox()
     acct_1 = sandbox_accounts.pop()
     acct_2 = sandbox_accounts.pop()
     print(f"Popped out accounts: \n  - {acct_1.address}\n  - {acct_2.address}")
@@ -377,14 +372,18 @@ def demo():
     )
 
     # Create the application on chain, using the Application Client (signed by acct_2)
-    print("Creating the application using account 2...\nManager: account 2\nOracle: account 1")
-    app_id, app_addr, tx_id = app_client_acct_2.create(
+    print("Creating the application using account 2...")
+    app_id, app_addr, tx_id = app_client_acct_2.create()
+    print(f"Created app with id: {app_id} and address: {app_addr} in tx: {tx_id}")
+
+    # Setup the application
+    app_client_acct_2.call(
+        AlgoBet.setup,
         manager_addr=acct_2.address,
         oracle_addr=acct_1.address,
-        event_end_unix_timestamp=int(time.time() + 0),
-        payout_time_window_s=int(0)
+        event_end_unix_timestamp=int(time.time() + 60),
+        payout_time_window_s=int(60)
     )
-    print(f"Created app with id: {app_id} and address: {app_addr} in tx: {tx_id}")
     print(f"Current app state: {app_client_acct_2.get_application_state()}")
 
     # Fund the app account with 1 algo (using acct_1) for minimum balance

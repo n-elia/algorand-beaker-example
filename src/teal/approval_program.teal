@@ -10,15 +10,15 @@ pushbytes 0x524b57ce // "bet(uint64,pay)void"
 ==
 bnz main_l9
 txna ApplicationArgs 0
-pushbytes 0x79bca08b // "create(address,address,uint64,uint64)void"
+pushbytes 0xce706dd1 // "payout()void"
 ==
 bnz main_l8
 txna ApplicationArgs 0
-pushbytes 0xce706dd1 // "payout()void"
+pushbytes 0xfabd6f88 // "set_event_result(uint64)void"
 ==
 bnz main_l7
 txna ApplicationArgs 0
-pushbytes 0xfabd6f88 // "set_event_result(uint64)void"
+pushbytes 0xf22ff38d // "setup(address,address,uint64,uint64)void"
 ==
 bnz main_l6
 err
@@ -29,32 +29,6 @@ intc_0 // NoOp
 txn ApplicationID
 intc_0 // 0
 !=
-&&
-assert
-txna ApplicationArgs 1
-btoi
-callsub seteventresult_9
-intc_1 // 1
-return
-main_l7:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub payout_7
-intc_1 // 1
-return
-main_l8:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-==
 &&
 assert
 txna ApplicationArgs 1
@@ -71,7 +45,33 @@ load 2
 load 3
 load 4
 load 5
-callsub create_6
+callsub setup_13
+intc_1 // 1
+return
+main_l7:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+txna ApplicationArgs 1
+btoi
+callsub seteventresult_9
+intc_1 // 1
+return
+main_l8:
+txn OnCompletion
+intc_0 // NoOp
+==
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub payout_7
 intc_1 // 1
 return
 main_l9:
@@ -97,54 +97,71 @@ intc_1 // pay
 assert
 load 0
 load 1
-callsub bet_5
+callsub bet_6
 intc_1 // 1
 return
 main_l10:
 txn OnCompletion
+intc_0 // NoOp
+==
+bnz main_l16
+txn OnCompletion
 intc_1 // OptIn
 ==
-bnz main_l14
+bnz main_l15
 txn OnCompletion
 pushint 5 // DeleteApplication
 ==
-bnz main_l13
+bnz main_l14
 err
-main_l13:
-txn ApplicationID
-intc_0 // 0
-!=
-assert
-callsub delete_2
-intc_1 // 1
-return
 main_l14:
 txn ApplicationID
 intc_0 // 0
 !=
 assert
-callsub optin_3
+callsub delete_3
+intc_1 // 1
+return
+main_l15:
+txn ApplicationID
+intc_0 // 0
+!=
+assert
+callsub optin_4
+intc_1 // 1
+return
+main_l16:
+txn ApplicationID
+intc_0 // 0
+==
+assert
+callsub create_0
+intc_1 // 1
+return
+
+// create
+create_0:
 intc_1 // 1
 return
 
 // auth_only
-authonly_0:
+authonly_1:
 bytec 8 // "oracle_addr"
 app_global_get
 ==
 retsub
 
 // auth_only
-authonly_1:
+authonly_2:
 bytec 9 // "manager"
 app_global_get
 ==
 retsub
 
 // delete
-delete_2:
+delete_3:
 txn Sender
-callsub authonly_1
+callsub authonly_2
 // unauthorized
 assert
 global LatestTimestamp
@@ -176,7 +193,7 @@ intc_1 // 1
 return
 
 // opt_in
-optin_3:
+optin_4:
 txn Sender
 bytec 11 // "chosen_opt"
 intc_0 // 0
@@ -192,17 +209,17 @@ app_local_put
 retsub
 
 // auth_opted_in
-authoptedin_4:
+authoptedin_5:
 global CurrentApplicationID
 app_opted_in
 retsub
 
 // bet
-bet_5:
+bet_6:
 store 7
 store 6
 txn Sender
-callsub authoptedin_4
+callsub authoptedin_5
 // unauthorized
 assert
 bytec_3 // "event_result"
@@ -234,19 +251,19 @@ assert
 load 6
 intc_0 // 0
 ==
-bnz bet_5_l13
+bnz bet_6_l13
 load 6
 intc_1 // 1
 ==
-bnz bet_5_l12
+bnz bet_6_l12
 load 6
 intc_2 // 2
 ==
-bnz bet_5_l4
+bnz bet_6_l4
 err
-bet_5_l4:
+bet_6_l4:
 intc_1 // 1
-bet_5_l5:
+bet_6_l5:
 // Valid options are: 0, 1, 2
 assert
 txn Sender
@@ -256,47 +273,47 @@ app_local_put
 load 6
 intc_0 // 0
 ==
-bnz bet_5_l11
+bnz bet_6_l11
 load 6
 intc_1 // 1
 ==
-bnz bet_5_l10
+bnz bet_6_l10
 load 6
 intc_2 // 2
 ==
-bnz bet_5_l9
+bnz bet_6_l9
 err
-bet_5_l9:
+bet_6_l9:
 bytec 4 // "counter_opt_2"
 bytec 4 // "counter_opt_2"
 app_global_get
 intc_1 // 1
 +
 app_global_put
-b bet_5_l14
-bet_5_l10:
+b bet_6_l14
+bet_6_l10:
 bytec 5 // "counter_opt_1"
 bytec 5 // "counter_opt_1"
 app_global_get
 intc_1 // 1
 +
 app_global_put
-b bet_5_l14
-bet_5_l11:
+b bet_6_l14
+bet_6_l11:
 bytec 6 // "counter_opt_0"
 bytec 6 // "counter_opt_0"
 app_global_get
 intc_1 // 1
 +
 app_global_put
-b bet_5_l14
-bet_5_l12:
+b bet_6_l14
+bet_6_l12:
 intc_1 // 1
-b bet_5_l5
-bet_5_l13:
+b bet_6_l5
+bet_6_l13:
 intc_1 // 1
-b bet_5_l5
-bet_5_l14:
+b bet_6_l5
+bet_6_l14:
 txn Sender
 bytec 12 // "has_placed_bet"
 intc_1 // 1
@@ -308,76 +325,6 @@ bytec 14 // "bet_amount"
 app_global_get
 +
 app_global_put
-retsub
-
-// create
-create_6:
-store 11
-store 10
-store 9
-store 8
-bytec 14 // "bet_amount"
-pushint 140000 // 140000
-app_global_put
-bytec 6 // "counter_opt_0"
-intc_0 // 0
-app_global_put
-bytec 5 // "counter_opt_1"
-intc_0 // 0
-app_global_put
-bytec 4 // "counter_opt_2"
-intc_0 // 0
-app_global_put
-bytec_3 // "event_result"
-intc_3 // 99
-app_global_put
-bytec_1 // "event_timestamp"
-intc_0 // 0
-app_global_put
-bytec 9 // "manager"
-global CreatorAddress
-app_global_put
-bytec 8 // "oracle_addr"
-global CreatorAddress
-app_global_put
-bytec 10 // "payout_time_window_s"
-intc_0 // 0
-app_global_put
-bytec_2 // "stake_amount"
-intc_0 // 0
-app_global_put
-bytec_0 // "winning_count"
-intc_0 // 0
-app_global_put
-bytec 7 // "winning_payout"
-intc_0 // 0
-app_global_put
-load 8
-txn Sender
-!=
-bnz create_6_l3
-create_6_l1:
-load 9
-txn Sender
-!=
-bz create_6_l4
-load 9
-callsub setoracle_11
-b create_6_l4
-create_6_l3:
-load 8
-callsub setmanager_10
-b create_6_l1
-create_6_l4:
-load 10
-global LatestTimestamp
->
-// Expiry time must be in the future.
-assert
-load 10
-callsub seteventendtime_8
-load 11
-callsub setpayouttime_12
 retsub
 
 // payout
@@ -414,17 +361,17 @@ retsub
 
 // set_event_end_time
 seteventendtime_8:
-store 12
+store 13
 bytec_1 // "event_timestamp"
-load 12
+load 13
 app_global_put
 retsub
 
 // set_event_result
 seteventresult_9:
-store 16
+store 8
 txn Sender
-callsub authonly_0
+callsub authonly_1
 // unauthorized
 assert
 global LatestTimestamp
@@ -433,15 +380,15 @@ app_global_get
 >=
 // Event expiry time not reached, yet.
 assert
-load 16
+load 8
 intc_0 // 0
 ==
 bnz seteventresult_9_l16
-load 16
+load 8
 intc_1 // 1
 ==
 bnz seteventresult_9_l15
-load 16
+load 8
 intc_2 // 2
 ==
 bnz seteventresult_9_l4
@@ -452,17 +399,17 @@ seteventresult_9_l5:
 // Valid options are: 0, 1, 2
 assert
 bytec_3 // "event_result"
-load 16
+load 8
 app_global_put
-load 16
+load 8
 intc_0 // 0
 ==
 bnz seteventresult_9_l14
-load 16
+load 8
 intc_1 // 1
 ==
 bnz seteventresult_9_l13
-load 16
+load 8
 intc_2 // 2
 ==
 bnz seteventresult_9_l9
@@ -519,24 +466,94 @@ retsub
 
 // set_manager
 setmanager_10:
-store 13
+store 14
 bytec 9 // "manager"
-load 13
+load 14
 app_global_put
 retsub
 
 // set_oracle
 setoracle_11:
-store 14
+store 15
 bytec 8 // "oracle_addr"
-load 14
+load 15
 app_global_put
 retsub
 
 // set_payout_time
 setpayouttime_12:
-store 15
+store 16
 bytec 10 // "payout_time_window_s"
-load 15
+load 16
 app_global_put
+retsub
+
+// setup
+setup_13:
+store 12
+store 11
+store 10
+store 9
+bytec 14 // "bet_amount"
+pushint 140000 // 140000
+app_global_put
+bytec 6 // "counter_opt_0"
+intc_0 // 0
+app_global_put
+bytec 5 // "counter_opt_1"
+intc_0 // 0
+app_global_put
+bytec 4 // "counter_opt_2"
+intc_0 // 0
+app_global_put
+bytec_3 // "event_result"
+intc_3 // 99
+app_global_put
+bytec_1 // "event_timestamp"
+intc_0 // 0
+app_global_put
+bytec 9 // "manager"
+global CreatorAddress
+app_global_put
+bytec 8 // "oracle_addr"
+global CreatorAddress
+app_global_put
+bytec 10 // "payout_time_window_s"
+intc_0 // 0
+app_global_put
+bytec_2 // "stake_amount"
+intc_0 // 0
+app_global_put
+bytec_0 // "winning_count"
+intc_0 // 0
+app_global_put
+bytec 7 // "winning_payout"
+intc_0 // 0
+app_global_put
+load 9
+txn Sender
+!=
+bnz setup_13_l3
+setup_13_l1:
+load 10
+txn Sender
+!=
+bz setup_13_l4
+load 10
+callsub setoracle_11
+b setup_13_l4
+setup_13_l3:
+load 9
+callsub setmanager_10
+b setup_13_l1
+setup_13_l4:
+load 11
+global LatestTimestamp
+>
+// Expiry time must be in the future.
+assert
+load 11
+callsub seteventendtime_8
+load 12
+callsub setpayouttime_12
 retsub
