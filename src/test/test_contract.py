@@ -219,15 +219,20 @@ class TestBase:
         `oracle_addr` parameter is set as the `oracle_account` account address.
         """
         logger.debug("Creating the application...")
-        app_id, app_addr, tx_id = creator_app_client.create(
+        app_id, app_addr, tx_id = creator_app_client.create()
+        logger.debug(f"Created app with id: {app_id} and address: {app_addr} in tx: {tx_id}")
+
+        logger.debug("Setting up the application...")
+        result = creator_app_client.call(
+            App.setup,
             manager_addr=creator_app_client.get_sender(),
             oracle_addr=oracle_account.address,  # Don't use oracle client before app creation
             event_end_unix_timestamp=int(time.time() + self.config["event_end_since_test_start_s"]),
             payout_time_window_s=self.config["payout_time_s"],
         )
-        logger.debug(f"Created app with id: {app_id} and address: {app_addr} in tx: {tx_id}")
         app_state = creator_app_client.get_application_state()
-        logger.debug(f"Current app state: {app_state}")
+        logger.debug(f"Setup requested with transaction: {result.tx_id}.\n"
+                     f"Current app state: {app_state}")
 
         # Fund the app account with 200 milliAlgos (using creator account) for minimum balance
         fund_amount = 200 * consts.milli_algo

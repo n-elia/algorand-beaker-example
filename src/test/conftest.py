@@ -58,8 +58,8 @@ def sandbox_setup(enable_sandbox_management):
     """
     # Shell scripts to manage the sandbox
     # Alternatively, sandbox binary with proper parameters can be used here
-    setup_script_fp = 'test/sandbox/sandbox_setup.sh'
-    teardown_script_fp = 'test/sandbox/sandbox_teardown.sh'
+    setup_script_fp = 'src/test/sandbox/sandbox_setup.sh'
+    teardown_script_fp = 'src/test/sandbox/sandbox_teardown.sh'
 
     def run_and_wait(script_filepath):
         import subprocess

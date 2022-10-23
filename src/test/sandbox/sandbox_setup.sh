@@ -1,6 +1,7 @@
 #!/bin/sh
 cd /home/ubi/Documents/algorand-learning/sandbox/sandbox || exit
 ./sandbox up dev
+./sandbox reset
 
 # Create additional_accounts, funding them from the main one
 additional_accounts=4
