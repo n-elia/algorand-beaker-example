@@ -1,30 +1,42 @@
-import json
-import time
+"""Parent application smart contract
 
-from algosdk.logic import get_application_address
+This file contains the definition of the parent smart contract, which may be used to
+instantiate several instances of the child smart contract.
+"""
+import time
+from typing import Final
+
+from beaker import Application, external, sandbox, client, consts, ApplicationStateValue
+from beaker.precompile import AppPrecompile
 from pyteal import (
     abi,
     TealType,
     TxnType,
     Seq,
-    Assert,
-    Len,
     InnerTxnBuilder,
     TxnField,
-    Int,
     InnerTxn,
-    ScratchVar,
+    Global,
 )
-from beaker import Application, Precompile, external, sandbox, client, consts
-from beaker.application import get_method_signature
-from contract import AlgoBet
+
 from config import current_config as cc
+from contract import AlgoBet
 
 
 class Parent(Application):
-    sub_app = AlgoBet()
-    sub_app_approval: Precompile = Precompile(sub_app.approval_program)
-    sub_app_clear: Precompile = Precompile(sub_app.clear_program)
+    ###########################################
+    # Application State
+    ###########################################
+
+    # Store a "manager" account, which will have particular privileges
+    manager: Final[ApplicationStateValue] = ApplicationStateValue(
+        stack_type=TealType.bytes,
+        # Default to the application creator address
+        default=Global.creator_address()
+    )
+
+    # Store the pre-compiled child application
+    sub_app: Final[AppPrecompile] = AppPrecompile(AlgoBet())
 
     @external
     def create_sub(self, *, output: abi.Uint64):
@@ -32,8 +44,8 @@ class Parent(Application):
             InnerTxnBuilder.Execute(
                 {
                     TxnField.type_enum: TxnType.ApplicationCall,
-                    TxnField.approval_program: self.sub_app_approval.binary_bytes,
-                    TxnField.clear_state_program: self.sub_app_clear.binary_bytes,
+                    TxnField.approval_program: self.sub_app.approval.binary,
+                    TxnField.clear_state_program: self.sub_app.clear.binary,
                 }
             ),
             output.set(InnerTxn.created_application_id()),
@@ -98,3 +110,4 @@ def demo():
 
 if __name__ == "__main__":
     demo()
+    # pass

@@ -133,7 +133,6 @@ class AlgoBet(Application):
     # Administrative Actions
     ###########################################
 
-    # @create
     @external
     def setup(self,
               manager_addr: abi.Address,

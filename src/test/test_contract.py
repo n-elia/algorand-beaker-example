@@ -15,10 +15,10 @@ from beaker.client import ApplicationClient, LogicException
 from beaker.sandbox import SandboxAccount
 from pyteal import Approve
 
-from src.test.conftest import logger
-from src.contract import AlgoBet as App
+from test.conftest import logger
+from contract import AlgoBet as App
 
-from src.config import current_config as cc
+from config import current_config as cc
 
 # Block production time
 block_prod_time = 0
