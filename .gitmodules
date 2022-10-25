@@ -1,4 +1,0 @@
-[submodule "src/test/sandbox"]
-	path = src/test/sandbox
-	url = https://github.com/algorand/sandbox.git
-	branch = main
