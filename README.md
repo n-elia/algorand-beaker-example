@@ -197,31 +197,32 @@ The workarounds proposed by us and applied within this repository project are, r
   making timestamp comparisons.
   When using `pytest` as test framework, a fixture may be used to dynamically configure a client ready to ping the dummy
   transaction. A snippet extracted from `test/test_contract.py` follows.
+5
   ```python
-    from contract import AlgoBet as App
-
-    # Workaround for https://github.com/algorand/go-algorand/issues/3192 .
-    # Add a dummy transaction to the smart contract. This transaction may be used for triggering
-    # the creation of a new block when using a sandbox in dev mode. In this way, transactions
-    # which depend on the timestamp of last forged block will be able to retrieve a recent block
-    # for current timestamp estimation.
-    @external
-    def dummy(self):
-        return Approve()
-    
-    App.dummy = dummy
+  from contract import AlgoBet as App
   
-    @pytest.fixture(scope="class")
-    def ping_sandbox(self, get_client):
-        """Require a dummy transaction for triggering the creation of a new sandbox block.
-        Workaround for https://github.com/algorand/go-algorand/issues/3192 .
-        """
-        c = get_client()
-
-        def _call_dummy(client=c):
-            client.call(App.dummy)
-
-        return _call_dummy
+  # Workaround for https://github.com/algorand/go-algorand/issues/3192 .
+  # Add a dummy transaction to the smart contract. This transaction may be used for triggering
+  # the creation of a new block when using a sandbox in dev mode. In this way, transactions
+  # which depend on the timestamp of last forged block will be able to retrieve a recent block
+  # for current timestamp estimation.
+  @external
+  def dummy(self):
+    return Approve()
+    
+  App.dummy = dummy
+  
+  @pytest.fixture(scope="class")
+  def ping_sandbox(self, get_client):
+    """Require a dummy transaction for triggering the creation of a new sandbox block.
+    Workaround for https://github.com/algorand/go-algorand/issues/3192 .
+    """
+    c = get_client()
+  
+    def _call_dummy(client=c):
+      client.call(App.dummy)
+  
+    return _call_dummy
   ```
 
 ## Smart Contract Specifications
@@ -353,14 +354,26 @@ To run tests, the sandbox in `dev`mode must be up and running.
 Therefore, we provided the test suite with the possibility to set up and teardown the sandbox network during each test
 session.
 
-Depending on your configuration, set up the `src/test/sandbox/sandbox_setup.sh`
-and `src/test/sandbox/sandbox_teardown.sh` shell scripts to point to your `sandbox` folder.
+This repository contains `sandbox` as a submodule, and the provided scripts point to it. Therefore, you can choose
+between:
+
+- setting up the `src/test/sandbox-scripts/sandbox_setup.sh`
+  and `src/test/sandbox-scripts/sandbox_teardown.sh` shell scripts to point to your own `sandbox` directory.
+- download `sandbox` submodule (note: it requires you a
+  working [docker-compose installation](https://docs.docker.com/compose/install/)):
+  ```shell
+  # After moving in repo root directory
+  git submodule init
+  git submodule update
+  ```
+
 Then, you can enable automatic execution of those scripts at each run by using the `--sandbox` parameter on the `pytest`
 CLI.
 
 To run the test suite with default settings, just issue:
 
 ``` shell
+# After moving in repo root directory
 make test
 ```
 
@@ -398,7 +411,9 @@ python compile.py
 
 To showcase our DApp, we set up an AlgoBet contract, created on `testnet` on Mon, 17 October 2022 20:00:25 (TX ID:
 `MQDBOYVMJETEL5KTVUYUAMLKRAXF2GE2KNEUOQIQQ773OV555RQQ`).\
-You can browse the AlgoBet contract account [here](https://app.dappflow.org/explorer/account/R73SCK5BKU3TEP3ZBHV3LFWG56HPWGLDTOFATAR75BHIXS256Y7OTHJ4EI/transactions) on Dappflow.
+You can browse the AlgoBet contract
+account [here](https://app.dappflow.org/explorer/account/R73SCK5BKU3TEP3ZBHV3LFWG56HPWGLDTOFATAR75BHIXS256Y7OTHJ4EI/transactions)
+on Dappflow.
 
 ![Dappflow screenshot](docs/img/showcase_dappflow.png)
 
