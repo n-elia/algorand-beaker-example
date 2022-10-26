@@ -1,3 +1,4 @@
+[![Compile TEAL](https://github.com/n-elia/algorand-beaker-example/actions/workflows/tests.yml/badge.svg?branch=dev)](https://github.com/n-elia/algorand-beaker-example/actions/workflows/tests.yml)
 # An Algorand smart contract example using Beaker
 
 This repository serves as an example to beginners. It contains an example of a working smart contract and its testing.
