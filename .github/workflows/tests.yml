@@ -19,7 +19,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-        submodules: 'true'
+        with:
+          submodules: 'true'
 
       - name: Set up Python 3.10
         uses: actions/setup-python@v3
@@ -57,7 +58,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-        submodules: 'true'
+        with:
+          submodules: 'true'
 
       - name: Set up Python 3.10
         uses: actions/setup-python@v3
