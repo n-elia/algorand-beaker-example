@@ -1,7 +1,7 @@
 attrs==22.1.0
 beaker-pyteal==0.3.6
 cffi==1.15.1
-docstring-parser==0.15
+docstring-parser==0.14.1
 iniconfig==1.1.1
 msgpack==1.0.4
 packaging==21.3
