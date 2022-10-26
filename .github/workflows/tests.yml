@@ -7,9 +7,9 @@ name: 'Compile TEAL'
 on:
   workflow_dispatch:
   push:
-    branches: [ $default-branch, dev ]
+    branches: [ main, dev ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ main, dev ]
 
 permissions:
   contents: write
@@ -36,7 +36,7 @@ jobs:
       - name: Setup Algorand sandbox
         run: |
           cd src/test/sandbox
-          ./sandbox up -v
+          ./sandbox up dev
 
       - name: Compile contracts to TEAL code
         run: |
@@ -73,9 +73,14 @@ jobs:
           pip install -r src/requirements.txt
           pip install -r src/test/requirements.txt
 
+      - name: Setup Algorand sandbox
+        run: |
+          cd src/test/sandbox
+          ./sandbox up dev
+      
       - name: Run tests
         run: |
-          make test
+          make test-no-sandbox
 
       - name: Upload test report as artifact
         uses: actions/upload-artifact@v3
