@@ -7,7 +7,7 @@ name: 'Compile TEAL'
 on:
   workflow_dispatch:
   push:
-    branches: [ $default-branch, parent-child ]
+    branches: [ $default-branch, dev ]
   pull_request:
     branches: [ $default-branch ]
 
