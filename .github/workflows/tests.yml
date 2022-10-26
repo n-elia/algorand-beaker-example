@@ -1,8 +1,7 @@
-name: 'Compile TEAL'
+name: 'Smart contract tests'
 
-# **What it does**: Compiles the smart contracts into TEAL codes.
-# **Why we have it**: To make sure all smart contracts compile correctly.
-# **Who does it impact**: Saves the artifacts into `src/teal` directory.
+# **What it does**: Compiles the smart contracts into TEAL codes, and run tests.
+# **Why we have it**: To make sure all smart contracts compile and behave correctly.
 
 on:
   workflow_dispatch:

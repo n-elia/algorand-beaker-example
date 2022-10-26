@@ -1,4 +1,5 @@
 [![Compile TEAL](https://github.com/n-elia/algorand-beaker-example/actions/workflows/tests.yml/badge.svg?branch=dev)](https://github.com/n-elia/algorand-beaker-example/actions/workflows/tests.yml)
+
 # An Algorand smart contract example using Beaker
 
 This repository serves as an example to beginners. It contains an example of a working smart contract and its testing.
@@ -7,6 +8,21 @@ The example has been developed starting from [AlgoBet](https://github.com/n-elia
 decentralized bet system powered by Algorand that was born during
 the 2022 edition
 of [International School on Algorand Smart Contracts](https://algorand-school.github.io/algorand-school/).
+
+## What you can see this repository
+
+- Smart contract implemented using Beaker framework: `src/contract.py`.
+
+- An example of parent-child architecture implemented using Beaker Precompile: `src/parent.py` is a parent contract,
+  which can be used to spawn `src/contract.py` child contracts, using the approach described
+  in [algorand-devrel/parent-child-contracts](https://github.com/algorand-devrel/parent-child-contracts).
+
+- Examples of testing time-based transactions with sandbox in `dev` mode, overcoming the issues introduced by the
+  sandbox
+  explained [here](https://github.com/n-elia/algobet#smart-contract-testing-issues-and-workarounds).
+
+- An example of automated CI workflow (based on GitHub Actions) which compiles the smart contracts into TEAL code and
+  runs tests: `.github/workflows/tests.yml`.
 
 ## How to: deploy the smart contract and run a demo
 
@@ -131,14 +147,3 @@ The script `src/teal/compile.py` can be run to generate the Approval Program, Cl
 ```shell
 python src/teal/compile.py
 ```
-
-## What you can see this repository
-
-- Smart contract implemented using Beaker framework: `src/contract.py`.
-
-- Parent-child architecture implemented using Beaker Precompile: `src/parent.py` is a parent contract, which can be used
-  to spawn AlgoBet child contracts, using the approach
-  suggested in [algorand-devrel/parent-child-contracts](https://github.com/algorand-devrel/parent-child-contracts).
-
-- Tests of time-based transactions with sandbox in `dev` mode, overcoming the issues introduced by the sandbox
-  explained [here](https://github.com/n-elia/algobet#smart-contract-testing-issues-and-workarounds).
