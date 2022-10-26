@@ -50,7 +50,7 @@ sandbox included in this repository:
 
 ```shell
 cd src/test/sandbox
-./sandbox up dev
+./sandbox up
 
 # After sandbox loading, run the demo
 python src/contract.py
