@@ -1,7 +1,6 @@
 import logging
 import time
 from pprint import pformat
-from typing import Callable
 
 import pytest
 from algosdk.atomic_transaction_composer import TransactionWithSigner
@@ -9,19 +8,19 @@ from algosdk.encoding import decode_address
 from algosdk.future import transaction
 from beaker import (
     consts,
-    external, sandbox
+    external
 )
 from beaker.client import ApplicationClient, LogicException
 from beaker.sandbox import SandboxAccount
 from pyteal import Approve
 
-from test.conftest import logger
-from contract import AlgoBet as App
-
 from config import current_config as cc
+from contract import AlgoBet as App
+from test import TestBase
+from test.conftest import logger
 
 # Block production time
-block_prod_time = 0
+block_prod_time = 0 if cc.TEST_SANDBOX_CONFIG == "dev" else 5
 
 
 # Workaround for https://github.com/algorand/go-algorand/issues/3192 .
@@ -37,9 +36,9 @@ def dummy(self):
 App.dummy = dummy
 
 
-class TestBase:
+class TestContractBase(TestBase):
     """
-    Base class for testing routines.
+    Base class for AlgoBet testing routines.
 
     When subclassing this, `config` dictionary and `_safe_*` methods will be subclass-scoped.
     A new instance of smart contract is deployed for each subclass, and its application ID may
@@ -47,14 +46,11 @@ class TestBase:
     This allows classes to have different smart contract instances, each one with its own
     timing constraints.
     """
-    ###########################################
-    # Test configuration
-    ###########################################
     # Test configuration
     config = {
         "session_start_s": time.time(),  # Start time of test session
         "event_end_since_test_start_s": 2,  # Time interval before event end
-        "payout_time_s": 2  # Minimum time interval to allow payout
+        "payout_time_s": 3  # Minimum time interval to allow payout
     }
 
     def _safe_to_payout(self):
@@ -72,7 +68,11 @@ class TestBase:
                 # Workaround for https://github.com/algorand/go-algorand/issues/3192 .
                 ping_sandbox()
                 time.sleep(1)
-            time.sleep(2)
+            # Summing the worst-case errors due to timestamp precision:
+            # - current time taken from host machine, with 1s precision
+            # - expiry timestamp given from host machine, with 1s precision
+            # - next timestamp given from sandbox and stored with 1s precision
+            time.sleep(3)
             ping_sandbox()
 
         return _safe_wait_to_payout
@@ -93,7 +93,11 @@ class TestBase:
                 # Workaround for https://github.com/algorand/go-algorand/issues/3192 .
                 ping_sandbox()
                 time.sleep(1)
-            time.sleep(2)
+            # Summing the worst-case errors due to timestamp precision:
+            # - current time taken from host machine, with 1s precision
+            # - expiry timestamp given from host machine, with 1s precision
+            # - next timestamp given from sandbox and stored with 1s precision
+            time.sleep(3)
             ping_sandbox()
 
         return _safe_wait_to_delete
@@ -106,39 +110,6 @@ class TestBase:
         self.config["session_start_s"] = time.time()
         logging.debug(f'{self.config["session_start_s"]}')
         return
-
-    ###########################################
-    # Test Accounts and Clients
-    ###########################################
-    @pytest.fixture(scope="class")
-    def accounts(self):
-        """Retrieve sandbox accounts. Accounts are re-listed for each TestBase subclass."""
-        # Pop accounts from sandbox accounts
-        if cc.TEST_SANDBOX_CONFIG == 'dev':
-            return sandbox.get_accounts()
-        elif cc.TEST_SANDBOX_CONFIG == 'testnet':
-            return sandbox.get_accounts(
-                wallet_name=cc.TEST_SANDBOX_WALLET_NAME,
-                wallet_password=cc.TEST_SANDBOX_WALLET_PASS
-            )
-        else:
-            pytest.exit("Wrong sandbox configuration")
-
-    @pytest.fixture(scope="class")
-    def get_account(self, accounts) -> Callable[[], SandboxAccount]:
-        """Pop an account from the list of sandbox accounts."""
-        accounts_count = 0
-
-        def _get_account():
-            nonlocal accounts_count
-            try:
-                accounts_count += 1
-                return accounts.pop()
-            except IndexError:
-                pytest.skip(f"Attempting to get {accounts_count} account from sandbox."
-                            f"No more available accounts in sandbox!", allow_module_level=True)
-
-        return _get_account
 
     @pytest.fixture(scope="class")
     def creator_app_client(self, get_account, algod_client) -> ApplicationClient:
@@ -225,7 +196,6 @@ class TestBase:
         logger.debug("Setting up the application...")
         result = creator_app_client.call(
             App.setup,
-            manager_addr=creator_app_client.get_sender(),
             oracle_addr=oracle_account.address,  # Don't use oracle client before app creation
             event_end_unix_timestamp=int(time.time() + self.config["event_end_since_test_start_s"]),
             payout_time_window_s=self.config["payout_time_s"],
@@ -251,8 +221,14 @@ class TestBase:
     def debug_print(self):
         logger.debug(f"Class configuration:\n{pformat(self.config)}")
 
+    @pytest.fixture(scope="class", autouse=True)
+    def pause_between_test_classes(self, app_addr, ping_sandbox):
+        time.sleep(1)
+        ping_sandbox()
+        yield
 
-class TestContractPermissions(TestBase):
+
+class TestContractPermissions(TestContractBase):
     def test_permissions_at_creation(self, app_addr, creator_app_client, oracle_app_client):
         # Get the App Global State
         app_state = creator_app_client.get_application_state()
@@ -394,7 +370,7 @@ class TestContractPermissions(TestBase):
             with pytest.raises(LogicException):
                 c.delete()
 
-    def test_app_deletion_and_close_out(self, creator_app_client, ping_sandbox, safe_wait_to_delete):
+    def test_app_deletion_and_close_out(self, creator_app_client, safe_wait_to_delete):
         # Delete the app
         safe_wait_to_delete()
         result = creator_app_client.delete()
@@ -404,12 +380,12 @@ class TestContractPermissions(TestBase):
         assert creator_app_client.get_application_account_info()['amount'] == 0
 
 
-class TestContractFlow(TestBase):
+class TestContractFlow(TestContractBase):
     # Test configuration
     config = {
         "session_start_s": time.time(),  # Start time of test session
-        "event_end_since_test_start_s": 10,  # Time interval before event end
-        "payout_time_s": 10  # Minimum time interval to allow payout
+        "event_end_since_test_start_s": 15,  # Time interval before event end
+        "payout_time_s": 15  # Minimum time interval to allow payout
     }
 
     def test_participants_opt_in(self, app_addr, participant_clients):
@@ -596,7 +572,7 @@ class TestContractFlow(TestBase):
         creator_app_client.delete()
 
 
-class TestContractNoWinners(TestBase):
+class TestContractNoWinners(TestContractBase):
     def test_participants_opt_in(self, app_addr, participant_clients):
         for p in participant_clients:
             p.opt_in()

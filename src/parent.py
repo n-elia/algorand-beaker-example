@@ -6,18 +6,16 @@ instantiate several instances of the child smart contract.
 import time
 from typing import Final
 
-from beaker import Application, external, sandbox, client, consts, ApplicationStateValue
+from beaker import Application, external, sandbox, consts, ApplicationStateValue
+from beaker.client.application_client import ApplicationClient
 from beaker.precompile import AppPrecompile
 from pyteal import (
     abi,
     TealType,
-    TxnType,
     Seq,
     InnerTxnBuilder,
-    TxnField,
     InnerTxn,
-    Global,
-)
+    Global, )
 
 from config import current_config as cc
 from contract import AlgoBet
@@ -43,9 +41,8 @@ class Parent(Application):
         return Seq(
             InnerTxnBuilder.Execute(
                 {
-                    TxnField.type_enum: TxnType.ApplicationCall,
-                    TxnField.approval_program: self.sub_app.approval.binary,
-                    TxnField.clear_state_program: self.sub_app.clear.binary,
+                    # Auto generation of create call parameters
+                    **self.sub_app.get_create_config(),
                 }
             ),
             output.set(InnerTxn.created_application_id()),
@@ -64,50 +61,47 @@ def demo():
         else:
             raise NameError("Wrong sandbox configuration")
 
+    # Get accounts
     accts = _get_accounts_from_sandbox()
     acct = accts.pop()
     acct2 = accts.pop()
 
     # Create main app and fund it
-    app_client_main = client.ApplicationClient(
+    app_client_main = ApplicationClient(
         sandbox.get_algod_client(), Parent(), signer=acct.signer
     )
     main_app_id, _, _ = app_client_main.create()
-    print(f"Created main app: {main_app_id}")
+    print(f"Created main app: {main_app_id} by account {app_client_main.sender}")
     app_client_main.fund(1 * consts.algo)
 
     # Call the main app to create the sub app
     result = app_client_main.call(Parent.create_sub)
     sub_app_id = result.return_value
-    print(f"Created sub app: {sub_app_id}")
+    print(f"Created sub app: {sub_app_id} by account {app_client_main.sender}")
+    print(f"Sub app state:\n{app_client_main.get_application_state()}")
 
-    # setup client for sub app, signed by acct2
-    sub_app_client = client.ApplicationClient(
-        sandbox.get_algod_client(), AlgoBet(), signer=acct2.signer
+    # Create a new user using account 2
+    app_client_user = ApplicationClient(
+        client=sandbox.get_algod_client(),
+        app=AlgoBet(),
+        signer=acct2.signer,
+        app_id=sub_app_id,
     )
-    result = sub_app_client.create()
-    print(result)
-    print("sub app client: ", sub_app_client.sender)
-    # sub_app_client.app_id = sub_app_id
-    # sub_app_client.app_addr = get_application_address(sub_app_id)
 
-    # Call setup method of sub app
-    result = sub_app_client.call(
+    # Opt-in the child smart contract
+    app_client_user.opt_in()
+    print(f"Sub app state:\n{app_client_user.get_application_state()}")
+    print(f"Account state:\n{app_client_user.get_account_state()}")
+
+    # Set up the child smart contract
+    app_client_user.call(
         AlgoBet.setup,
-        manager_addr=acct.address,
-        oracle_addr=acct.address,
-        event_end_unix_timestamp=int(time.time() + 60),
-        payout_time_window_s=int(60)
+        oracle_addr=app_client_user.sender,
+        event_end_unix_timestamp=int(time.time()) + 2,
+        payout_time_window_s=0,
     )
-    print(f"Return value: {result.return_value}")
-
-    # result = app_client_main.call(
-    #     Parent.delete_asset,
-    #     asset=created_asset,
-    # )
-    # print(f"Deleted asset in tx: {result.tx_id}")
+    print(f"Sub app state:\n{app_client_user.get_application_state()}")
 
 
 if __name__ == "__main__":
     demo()
-    # pass

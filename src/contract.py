@@ -15,11 +15,12 @@ from beaker import (
 )
 from beaker.application import Application
 from beaker.client import ApplicationClient
-from beaker.decorators import external, internal
+from beaker.decorators import external, internal, create
 from pyteal import (
     Assert, TealType, Global, Int, Approve, abi, Seq, Cond, InnerTxnBuilder, TxnField, TxnType,
-    Txn, Div, Minus, If
+    Txn, Div, Minus, If, Bytes
 )
+from pyteal.ast.abi import Address
 
 from config import current_config as cc
 
@@ -36,15 +37,15 @@ class AlgoBet(Application):
     # Store a "manager" account, which will have particular privileges
     manager: Final[ApplicationStateValue] = ApplicationStateValue(
         stack_type=TealType.bytes,
-        # Default to the application creator address
-        default=Global.creator_address()
+        # Default to an empty string
+        default=Bytes("")
     )
 
     # Store the oracle address
     oracle_addr: Final[ApplicationStateValue] = ApplicationStateValue(
         stack_type=TealType.bytes,
-        # Default to the application creator address
-        default=Global.creator_address()
+        # Default to an empty string
+        default=Bytes("")
     )
 
     # Store the event result
@@ -132,18 +133,24 @@ class AlgoBet(Application):
     ###########################################
     # Administrative Actions
     ###########################################
+    @create
+    def create(self):
+        return Seq(
+            self.initialize_application_state(),
+            Approve()
+        )
 
     @external
     def setup(self,
-              manager_addr: abi.Address,
+              # manager_addr: abi.Address,
               oracle_addr: abi.Address,
               event_end_unix_timestamp: abi.Uint64,
               payout_time_window_s: abi.Uint64):
-        """ Initialize application state variables at creation time. """
+        """ Initialize application state variables at creation time. Can be called only once. """
         return Seq(
-            self.initialize_application_state(),
-            If(manager_addr.get() != Txn.sender(), self.set_manager(manager_addr)),
-            If(oracle_addr.get() != Txn.sender(), self.set_oracle(oracle_addr)),
+            Assert(self.manager.get() == Bytes("")),  # Assert that manager hasn't been set
+            self.manager.set(Txn.sender()),  # Set the sender as manager
+            self.set_oracle(oracle_addr),
             # Checks that the provided event timestamp represents a future period
             Assert(event_end_unix_timestamp.get() > Global.latest_timestamp(),
                    comment="Expiry time must be in the future."),
@@ -305,7 +312,7 @@ class AlgoBet(Application):
             self.stake_amount.set(self.stake_amount.get() + self.bet_amount.get())
         )
 
-    @external
+    @external(authorize=Authorize.opted_in(app_id=Application.id))
     def payout(self):
         return Seq(
             # Assert that the participant has chosen the winning option
@@ -378,10 +385,9 @@ def demo():
     # Setup the application
     app_client_acct_2.call(
         AlgoBet.setup,
-        manager_addr=acct_2.address,
         oracle_addr=acct_1.address,
-        event_end_unix_timestamp=int(time.time() + 60),
-        payout_time_window_s=int(60)
+        event_end_unix_timestamp=int(time.time() + 2),
+        payout_time_window_s=int(2)
     )
     print(f"Current app state: {app_client_acct_2.get_application_state()}")
 

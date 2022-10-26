@@ -333,16 +333,12 @@ goal account new -w mywallet
 
 Then, fund those accounts using the [testnet bank](https://bank.testnet.algorand.network/) faucet.
 
-To make `beaker.sandbox` client able to access your wallet, edit the `contract.py/demo()` method as follows:
+To make `beaker.sandbox` client able to access your wallet, create a `src/.env` file as follows:
 
-```python
-# Pop an account from sandbox accounts
-wallet_name = "mywalletname"
-wallet_password = "mywalletpassword"
-sandbox_accounts = sandbox.get_accounts(
-    wallet_name=wallet_name,
-    wallet_password=wallet_password,
-)
+```dotenv
+TEST_SANDBOX_CONFIG=testnet
+TEST_SANDBOX_WALLET_NAME=mywallet
+TEST_SANDBOX_WALLET_PASS=mywalletpassword
 ```
 
 Then, you will be able to run the demo script as explained in the previous subsection.

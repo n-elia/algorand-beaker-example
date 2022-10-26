@@ -243,7 +243,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>pytest_report.html</h1>
-    <p>Report generated on 25-Oct-2022 at 12:46:18 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <p>Report generated on 26-Oct-2022 at 02:51:32 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -259,8 +259,8 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>Python</td>
         <td>3.10.6</td></tr></table>
     <h2>Summary</h2>
-    <p>26 tests ran in 182.08 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">26 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <p>28 tests ran in 144.59 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">28 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -275,26 +275,13 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractPermissions::test_permissions_at_creation</td>
-          <td class="col-duration">142.66</td>
-          <td class="col-time">2022-10-25 10:46:18.321322</td></tr>
+          <td class="col-duration">80.88</td>
+          <td class="col-time">2022-10-26 00:51:32.355682</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="log"> -----------------------------Captured stdout setup------------------------------ <br/>
-Starting sandbox for: dev
-see sandbox.log for detailed progress, or use -v.
-
-[1A[0K
-[1A[0K [|] 
-[1A[0K
-[1A[0K* docker containers started!
-* waiting for services to initialize.
-the following did not start:
-* algorand node
-* indexer node
-One or more services failed to start.
-
 Stopping sandbox containers...
-Going to remove algorand-sandbox-postgres, algorand-sandbox-algod
+Going to remove algorand-sandbox-indexer, algorand-sandbox-algod, algorand-sandbox-postgres
 
 Starting sandbox for: dev
 see sandbox.log for detailed progress, or use -v.
@@ -304,115 +291,123 @@ see sandbox.log for detailed progress, or use -v.
 [1A[0K [/] 
 [1A[0K [-] 
 [1A[0K [\] 
+[1A[0K [|] 
 [1A[0K
 [1A[0K* docker containers started!
 * waiting for services to initialize.
 the following did not start:
 * indexer node
 One or more services failed to start.
-Attempting to create 4 more accounts, funding them from C5G7SQ7SOTETF6ITKNY5RQ664ATK2PJQQVIBSXBVNSTA7QOXOTVVZJ5EVE ...
+Attempting to create 4 more accounts, funding them from B7AHA2KKRCI6D3ITN4LGC6JREN63UJBQA6IWAOB2XWEYI7JHHYJ343PNPQ ...
 Creating account 1 ...
-Sent 50000000 MicroAlgos from account C5G7SQ7SOTETF6ITKNY5RQ664ATK2PJQQVIBSXBVNSTA7QOXOTVVZJ5EVE to address IWWF5FOGMODA5KYPGOKRDNU4WXIRQRLZGDAREQMVQSPFQXHA66YBUMM66A, transaction ID: D7SHB5B5RD7LHVLYQULJPBXAWJ3T2KKAP4SNWHPUMO57PCH7M63A. Fee set to 1000
-Transaction D7SHB5B5RD7LHVLYQULJPBXAWJ3T2KKAP4SNWHPUMO57PCH7M63A committed in round 1
+Sent 50000000 MicroAlgos from account B7AHA2KKRCI6D3ITN4LGC6JREN63UJBQA6IWAOB2XWEYI7JHHYJ343PNPQ to address BAHYRL5L2R47DT3GCKTMZCMTBXPRLJDTU5JIJQ7Q5REOCTK7JRTBMS2UC4, transaction ID: Q5GN345W67ZZLF52NG4RDKYC36MH3SZDWO4UHPDHQVZ6JCNQUB4A. Fee set to 1000
+Transaction Q5GN345W67ZZLF52NG4RDKYC36MH3SZDWO4UHPDHQVZ6JCNQUB4A committed in round 8
 Creating account 2 ...
-Sent 50000000 MicroAlgos from account C5G7SQ7SOTETF6ITKNY5RQ664ATK2PJQQVIBSXBVNSTA7QOXOTVVZJ5EVE to address HPODI57U632HIRHE55HBQQHLHXYCRMYG2Z7QIDNWUQ2N7VBGZUHDENMQNI, transaction ID: EDXQIK52KPYMQYKASGB7AMLKQEFQFQDOU3YYNCPXGWRYEM5FFDEQ. Fee set to 1000
-Transaction EDXQIK52KPYMQYKASGB7AMLKQEFQFQDOU3YYNCPXGWRYEM5FFDEQ committed in round 2
+Sent 50000000 MicroAlgos from account B7AHA2KKRCI6D3ITN4LGC6JREN63UJBQA6IWAOB2XWEYI7JHHYJ343PNPQ to address 2GXQFSCEBUYR6OSBRM65ANGVUBMQ7LF7IDEGMCCRPTNZ2NILK4NYI75VAA, transaction ID: WFTX2TDHLUSJU2YXQ5SVGQW2FWCXHI5NV5K6L7ZA5PUZSCHXSKXA. Fee set to 1000
+Transaction WFTX2TDHLUSJU2YXQ5SVGQW2FWCXHI5NV5K6L7ZA5PUZSCHXSKXA committed in round 9
 Creating account 3 ...
-Sent 50000000 MicroAlgos from account C5G7SQ7SOTETF6ITKNY5RQ664ATK2PJQQVIBSXBVNSTA7QOXOTVVZJ5EVE to address 2OFO2SGWVPKDLWHSST55MPZ46MXWFE37ZWKL3U7Q7LKIOSP5V66A6XZ2SY, transaction ID: OE2V7CCG7ALXIV4J3TJ7PGUCW4CZUU7Q6EXEFVPAHMFA4BZFYYJA. Fee set to 1000
-Transaction OE2V7CCG7ALXIV4J3TJ7PGUCW4CZUU7Q6EXEFVPAHMFA4BZFYYJA committed in round 3
+Sent 50000000 MicroAlgos from account B7AHA2KKRCI6D3ITN4LGC6JREN63UJBQA6IWAOB2XWEYI7JHHYJ343PNPQ to address PKSJHTVJ6XQDPYAV3DE63ESXUXINU5M7Z2DWHV7LKZJ3KUZQUZ3G52ADTQ, transaction ID: 4EFNJ5EGSNEVLYSCLARUORIOKVP53NALER242PL6FGTJWLBWNBFQ. Fee set to 1000
+Transaction 4EFNJ5EGSNEVLYSCLARUORIOKVP53NALER242PL6FGTJWLBWNBFQ committed in round 10
 Creating account 4 ...
-Sent 50000000 MicroAlgos from account C5G7SQ7SOTETF6ITKNY5RQ664ATK2PJQQVIBSXBVNSTA7QOXOTVVZJ5EVE to address CJFVNY35IL4MTDCKEUBTK2XCO2UUBZUQLSOG2S3DDP2TV2A4IEJ2P6PM5U, transaction ID: 6BZPFEFR22C4IYFSLRWPBED7PFLQQKVW22HPEEI7WL3GWKEZURGA. Fee set to 1000
-Transaction 6BZPFEFR22C4IYFSLRWPBED7PFLQQKVW22HPEEI7WL3GWKEZURGA committed in round 4
-[offline]	Unnamed-3	CJFVNY35IL4MTDCKEUBTK2XCO2UUBZUQLSOG2S3DDP2TV2A4IEJ2P6PM5U	50000000 microAlgos
-[online]	C5G7SQ7SOTETF6ITKNY5RQ664ATK2PJQQVIBSXBVNSTA7QOXOTVVZJ5EVE	C5G7SQ7SOTETF6ITKNY5RQ664ATK2PJQQVIBSXBVNSTA7QOXOTVVZJ5EVE	3999999799996000 microAlgos
-[online]	DI3N3IK6JNDYS7IOAY7WPJTKX6WCFJK2KL34IZ6NBOTMNKBGAQVH3QIESE	DI3N3IK6JNDYS7IOAY7WPJTKX6WCFJK2KL34IZ6NBOTMNKBGAQVH3QIESE	2000000000000000 microAlgos
-[offline]	Unnamed-1	HPODI57U632HIRHE55HBQQHLHXYCRMYG2Z7QIDNWUQ2N7VBGZUHDENMQNI	50000000 microAlgos
-[offline]	Unnamed-0	IWWF5FOGMODA5KYPGOKRDNU4WXIRQRLZGDAREQMVQSPFQXHA66YBUMM66A	50000000 microAlgos	*Default
-[online]	T36RV46QJBIFAQZJNQ44YLGKXYOWAVEFX2HSATTEZZIVUCYFZBWFHK2PMY	T36RV46QJBIFAQZJNQ44YLGKXYOWAVEFX2HSATTEZZIVUCYFZBWFHK2PMY	4000000000000000 microAlgos
-[offline]	Unnamed-2	2OFO2SGWVPKDLWHSST55MPZ46MXWFE37ZWKL3U7Q7LKIOSP5V66A6XZ2SY	50000000 microAlgos
+Sent 50000000 MicroAlgos from account B7AHA2KKRCI6D3ITN4LGC6JREN63UJBQA6IWAOB2XWEYI7JHHYJ343PNPQ to address CMRAH3DV74JVGBCOVNXNBBPFRVMVYHMDKIOLQGUVW5MQCEDBUBQ5GUNA6E, transaction ID: TPZBP22W5LOQDTAL7E6JCPAYOGE6YWPQMD4GUTXQKASYB4735DXQ. Fee set to 1000
+Transaction TPZBP22W5LOQDTAL7E6JCPAYOGE6YWPQMD4GUTXQKASYB4735DXQ committed in round 11
+[offline]	Unnamed-0	BAHYRL5L2R47DT3GCKTMZCMTBXPRLJDTU5JIJQ7Q5REOCTK7JRTBMS2UC4	50000000 microAlgos	*Default
+[online]	B7AHA2KKRCI6D3ITN4LGC6JREN63UJBQA6IWAOB2XWEYI7JHHYJ343PNPQ	B7AHA2KKRCI6D3ITN4LGC6JREN63UJBQA6IWAOB2XWEYI7JHHYJ343PNPQ	3999999799996000 microAlgos
+[offline]	Unnamed-3	CMRAH3DV74JVGBCOVNXNBBPFRVMVYHMDKIOLQGUVW5MQCEDBUBQ5GUNA6E	50000000 microAlgos
+[online]	EAXZSWIOLMSTJ3OZLZJ32YUIOVKRXRLHTFEOKMCSHDFDADPNQFJDMJBWDM	EAXZSWIOLMSTJ3OZLZJ32YUIOVKRXRLHTFEOKMCSHDFDADPNQFJDMJBWDM	1999999998854000 microAlgos	[created app IDs: 1]	[opted in app IDs: 1]
+[offline]	Unnamed-2	PKSJHTVJ6XQDPYAV3DE63ESXUXINU5M7Z2DWHV7LKZJ3KUZQUZ3G52ADTQ	50000000 microAlgos
+[online]	U7CIUZR5YKR7TEXJ2Q5R5SXR7L5QLNIVGDS5IUYRADIIPMNTLUD2OK3NX4	U7CIUZR5YKR7TEXJ2Q5R5SXR7L5QLNIVGDS5IUYRADIIPMNTLUD2OK3NX4	3999999999857000 microAlgos	[opted in app IDs: 1]
+[offline]	Unnamed-1	2GXQFSCEBUYR6OSBRM65ANGVUBMQ7LF7IDEGMCCRPTNZ2NILK4NYI75VAA	50000000 microAlgos
 <br/> -----------------------------Captured stderr setup------------------------------ <br/>[conftest.py:73 -        sandbox_setup() ] --sandbox argument provided -&gt; starting the sandbox...
-Removing algorand-sandbox-postgres ... 
+Stopping algorand-sandbox-algod    ... 
+Stopping algorand-sandbox-postgres ... 
+Stopping algorand-sandbox-postgres ... done
+Stopping algorand-sandbox-algod    ... done
+Removing algorand-sandbox-indexer  ... 
 Removing algorand-sandbox-algod    ... 
-Removing algorand-sandbox-algod    ... done
+Removing algorand-sandbox-postgres ... 
+Removing algorand-sandbox-indexer  ... done
 Removing algorand-sandbox-postgres ... done
-[test_contract.py:252 -          debug_print() ] Class configuration:
+Removing algorand-sandbox-algod    ... done
+[test_contract.py:222 -          debug_print() ] Class configuration:
 {&#x27;event_end_since_test_start_s&#x27;: 2,
- &#x27;payout_time_s&#x27;: 2,
- &#x27;session_start_s&#x27;: 1666694596.3333225}
-[test_contract.py:221 -             app_addr() ] Creating the application...
-[test_contract.py:223 -             app_addr() ] Created app with id: 5 and address: 2SYXFSCZAQCZ7YIFUCUZYOVR7G6Y3UBGSJIWT4EZ4CO3T6WVYTMHVSANOY in tx: 7HGQ3ORHHHI6KEBQELLXAV6ZPGI3A5XHV27RHXWZABVRSEKRDESA
-[test_contract.py:225 -             app_addr() ] Setting up the application...
-[test_contract.py:234 -             app_addr() ] Setup requested with transaction: 22QL5KHEL623XAHO2YAX3G6FWLHL67DHDFMUYQSNRBGOEWDXOP6A.
-Current app state: {&#x27;counter_opt_1&#x27;: 0, &#x27;counter_opt_0&#x27;: 0, &#x27;event_timestamp&#x27;: 1666694740, &#x27;bet_amount&#x27;: 140000, &#x27;counter_opt_2&#x27;: 0, &#x27;manager&#x27;: &#x27;d38aed48d6abd435d8f294fbd63f3cf32f62937fcd94bdd3f0fad48749fdafbc&#x27;, &#x27;winning_count&#x27;: 0, &#x27;winning_payout&#x27;: 0, &#x27;event_result&#x27;: 99, &#x27;payout_time_window_s&#x27;: 2, &#x27;stake_amount&#x27;: 0, &#x27;oracle_addr&#x27;: &#x27;9efd1af3d048505043296c39cc2ccabe1d605485be8f204e64ce515a0b05c86c&#x27;}
-[test_contract.py:240 -             app_addr() ] Funded 2SYXFSCZAQCZ7YIFUCUZYOVR7G6Y3UBGSJIWT4EZ4CO3T6WVYTMHVSANOY with 200000microAlgos
+ &#x27;payout_time_s&#x27;: 3,
+ &#x27;session_start_s&#x27;: 1666745347.8061175}
+[test_contract.py:192 -             app_addr() ] Creating the application...
+[test_contract.py:194 -             app_addr() ] Created app with id: 14 and address: LQRH3CW2MZGN2TOCTVBOOJVS42BZZKJ5PML6BPABTU4M7QULXOQNSZDO6E in tx: GEJ2ZWP4O3OJKOPB2D52QV23JTIGZLELE4IUSDDVB5SZBD3BNMCQ
+[test_contract.py:196 -             app_addr() ] Setting up the application...
+[test_contract.py:204 -             app_addr() ] Setup requested with transaction: G5VVBYOYOV5GYRG62A6UNSFIBV5DUI7SRJCRWA55UXFUPXL4IE4Q.
+Current app state: {&#x27;counter_opt_2&#x27;: 0, &#x27;oracle_addr&#x27;: &#x27;a7c48a663dc2a3f992e9d43b1ecaf1fafb05b51530e5d4531100d087b1b35d07&#x27;, &#x27;counter_opt_0&#x27;: 0, &#x27;bet_amount&#x27;: 140000, &#x27;event_timestamp&#x27;: 1666745429, &#x27;event_result&#x27;: 99, &#x27;payout_time_window_s&#x27;: 3, &#x27;winning_count&#x27;: 0, &#x27;stake_amount&#x27;: 0, &#x27;counter_opt_1&#x27;: 0, &#x27;manager&#x27;: &#x27;d1af02c8440d311f3a418b3dd034d5a0590facbf40c86608517cdb9d350b571b&#x27;, &#x27;winning_payout&#x27;: 0}
+[test_contract.py:210 -             app_addr() ] Funded LQRH3CW2MZGN2TOCTVBOOJVS42BZZKJ5PML6BPABTU4M7QULXOQNSZDO6E with 200000microAlgos
 <br/> -------------------------------Captured log setup------------------------------- <br/>INFO     test.conftest:conftest.py:73 --sandbox argument provided -&gt; starting the sandbox...
-DEBUG    test.conftest:test_contract.py:252 Class configuration:
+DEBUG    test.conftest:test_contract.py:222 Class configuration:
 {&#x27;event_end_since_test_start_s&#x27;: 2,
- &#x27;payout_time_s&#x27;: 2,
- &#x27;session_start_s&#x27;: 1666694596.3333225}
-DEBUG    test.conftest:test_contract.py:221 Creating the application...
-DEBUG    test.conftest:test_contract.py:223 Created app with id: 5 and address: 2SYXFSCZAQCZ7YIFUCUZYOVR7G6Y3UBGSJIWT4EZ4CO3T6WVYTMHVSANOY in tx: 7HGQ3ORHHHI6KEBQELLXAV6ZPGI3A5XHV27RHXWZABVRSEKRDESA
-DEBUG    test.conftest:test_contract.py:225 Setting up the application...
-DEBUG    test.conftest:test_contract.py:234 Setup requested with transaction: 22QL5KHEL623XAHO2YAX3G6FWLHL67DHDFMUYQSNRBGOEWDXOP6A.
-Current app state: {&#x27;counter_opt_1&#x27;: 0, &#x27;counter_opt_0&#x27;: 0, &#x27;event_timestamp&#x27;: 1666694740, &#x27;bet_amount&#x27;: 140000, &#x27;counter_opt_2&#x27;: 0, &#x27;manager&#x27;: &#x27;d38aed48d6abd435d8f294fbd63f3cf32f62937fcd94bdd3f0fad48749fdafbc&#x27;, &#x27;winning_count&#x27;: 0, &#x27;winning_payout&#x27;: 0, &#x27;event_result&#x27;: 99, &#x27;payout_time_window_s&#x27;: 2, &#x27;stake_amount&#x27;: 0, &#x27;oracle_addr&#x27;: &#x27;9efd1af3d048505043296c39cc2ccabe1d605485be8f204e64ce515a0b05c86c&#x27;}
-DEBUG    test.conftest:test_contract.py:240 Funded 2SYXFSCZAQCZ7YIFUCUZYOVR7G6Y3UBGSJIWT4EZ4CO3T6WVYTMHVSANOY with 200000microAlgos<br/></div></td></tr></tbody>
+ &#x27;payout_time_s&#x27;: 3,
+ &#x27;session_start_s&#x27;: 1666745347.8061175}
+DEBUG    test.conftest:test_contract.py:192 Creating the application...
+DEBUG    test.conftest:test_contract.py:194 Created app with id: 14 and address: LQRH3CW2MZGN2TOCTVBOOJVS42BZZKJ5PML6BPABTU4M7QULXOQNSZDO6E in tx: GEJ2ZWP4O3OJKOPB2D52QV23JTIGZLELE4IUSDDVB5SZBD3BNMCQ
+DEBUG    test.conftest:test_contract.py:196 Setting up the application...
+DEBUG    test.conftest:test_contract.py:204 Setup requested with transaction: G5VVBYOYOV5GYRG62A6UNSFIBV5DUI7SRJCRWA55UXFUPXL4IE4Q.
+Current app state: {&#x27;counter_opt_2&#x27;: 0, &#x27;oracle_addr&#x27;: &#x27;a7c48a663dc2a3f992e9d43b1ecaf1fafb05b51530e5d4531100d087b1b35d07&#x27;, &#x27;counter_opt_0&#x27;: 0, &#x27;bet_amount&#x27;: 140000, &#x27;event_timestamp&#x27;: 1666745429, &#x27;event_result&#x27;: 99, &#x27;payout_time_window_s&#x27;: 3, &#x27;winning_count&#x27;: 0, &#x27;stake_amount&#x27;: 0, &#x27;counter_opt_1&#x27;: 0, &#x27;manager&#x27;: &#x27;d1af02c8440d311f3a418b3dd034d5a0590facbf40c86608517cdb9d350b571b&#x27;, &#x27;winning_payout&#x27;: 0}
+DEBUG    test.conftest:test_contract.py:210 Funded LQRH3CW2MZGN2TOCTVBOOJVS42BZZKJ5PML6BPABTU4M7QULXOQNSZDO6E with 200000microAlgos<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractPermissions::test_opt_in_creator</td>
-          <td class="col-duration">0.29</td>
-          <td class="col-time">2022-10-25 10:46:18.321421</td></tr>
+          <td class="col-duration">0.37</td>
+          <td class="col-time">2022-10-26 00:51:32.355782</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:272 -  test_opt_in_creator() ] Try calling bet() without opting in...
-[test_contract.py:287 -  test_opt_in_creator() ] Opting-in accounts...
-[test_contract.py:291 -  test_opt_in_creator() ] Trying same transaction after opt-in...
-<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_contract.py:272 Try calling bet() without opting in...
-DEBUG    test.conftest:test_contract.py:287 Opting-in accounts...
-DEBUG    test.conftest:test_contract.py:291 Trying same transaction after opt-in...<br/></div></td></tr></tbody>
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:248 -  test_opt_in_creator() ] Try calling bet() without opting in...
+[test_contract.py:263 -  test_opt_in_creator() ] Opting-in accounts...
+[test_contract.py:267 -  test_opt_in_creator() ] Trying same transaction after opt-in...
+<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_contract.py:248 Try calling bet() without opting in...
+DEBUG    test.conftest:test_contract.py:263 Opting-in accounts...
+DEBUG    test.conftest:test_contract.py:267 Trying same transaction after opt-in...<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractPermissions::test_opt_in_participant</td>
-          <td class="col-duration">0.41</td>
-          <td class="col-time">2022-10-25 10:46:18.321481</td></tr>
+          <td class="col-duration">0.36</td>
+          <td class="col-time">2022-10-26 00:51:32.355843</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:310 - test_opt_in_participant() ] Try calling bet() without opting in...
-[test_contract.py:325 - test_opt_in_participant() ] Opting-in accounts...
-[test_contract.py:329 - test_opt_in_participant() ] Trying same transaction after opt-in...
-<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_contract.py:310 Try calling bet() without opting in...
-DEBUG    test.conftest:test_contract.py:325 Opting-in accounts...
-DEBUG    test.conftest:test_contract.py:329 Trying same transaction after opt-in...<br/></div></td></tr></tbody>
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:286 - test_opt_in_participant() ] Try calling bet() without opting in...
+[test_contract.py:301 - test_opt_in_participant() ] Opting-in accounts...
+[test_contract.py:305 - test_opt_in_participant() ] Trying same transaction after opt-in...
+<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_contract.py:286 Try calling bet() without opting in...
+DEBUG    test.conftest:test_contract.py:301 Opting-in accounts...
+DEBUG    test.conftest:test_contract.py:305 Trying same transaction after opt-in...<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractPermissions::test_opt_in_oracle</td>
-          <td class="col-duration">0.32</td>
-          <td class="col-time">2022-10-25 10:46:18.321538</td></tr>
+          <td class="col-duration">0.36</td>
+          <td class="col-time">2022-10-26 00:51:32.355900</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:348 -   test_opt_in_oracle() ] Try calling bet() without opting in...
-[test_contract.py:363 -   test_opt_in_oracle() ] Opting-in accounts...
-[test_contract.py:367 -   test_opt_in_oracle() ] Trying same transaction after opt-in...
-<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_contract.py:348 Try calling bet() without opting in...
-DEBUG    test.conftest:test_contract.py:363 Opting-in accounts...
-DEBUG    test.conftest:test_contract.py:367 Trying same transaction after opt-in...<br/></div></td></tr></tbody>
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:324 -   test_opt_in_oracle() ] Try calling bet() without opting in...
+[test_contract.py:339 -   test_opt_in_oracle() ] Opting-in accounts...
+[test_contract.py:343 -   test_opt_in_oracle() ] Trying same transaction after opt-in...
+<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_contract.py:324 Try calling bet() without opting in...
+DEBUG    test.conftest:test_contract.py:339 Opting-in accounts...
+DEBUG    test.conftest:test_contract.py:343 Trying same transaction after opt-in...<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractPermissions::test_set_result_from_non_authorized</td>
-          <td class="col-duration">2.23</td>
-          <td class="col-time">2022-10-25 10:46:18.321583</td></tr>
+          <td class="col-duration">4.37</td>
+          <td class="col-time">2022-10-26 00:51:32.355952</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractPermissions::test_delete_from_non_authorized</td>
-          <td class="col-duration">2.19</td>
-          <td class="col-time">2022-10-25 10:46:18.321625</td></tr>
+          <td class="col-duration">3.23</td>
+          <td class="col-time">2022-10-26 00:51:32.355995</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -420,46 +415,46 @@ DEBUG    test.conftest:test_contract.py:367 Trying same transaction after opt-in
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractPermissions::test_app_deletion_and_close_out</td>
-          <td class="col-duration">2.33</td>
-          <td class="col-time">2022-10-25 10:46:18.321676</td></tr>
+          <td class="col-duration">3.27</td>
+          <td class="col-time">2022-10-26 00:51:32.356046</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:401 - test_app_deletion_and_close_out() ] App deleted with TX PTITPEIDBVVV2CRI3FJNF7K7UA3JPRGDRPCJPD2LFBDLMX3LTBFQ
-<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_contract.py:401 App deleted with TX PTITPEIDBVVV2CRI3FJNF7K7UA3JPRGDRPCJPD2LFBDLMX3LTBFQ<br/></div></td></tr></tbody>
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:377 - test_app_deletion_and_close_out() ] App deleted with TX 3WYJIRZASXHZW2DGQOCAPRPEIGYZMPENOTKZGXTY53H2NBCUZEPQ
+<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_contract.py:377 App deleted with TX 3WYJIRZASXHZW2DGQOCAPRPEIGYZMPENOTKZGXTY53H2NBCUZEPQ<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_participants_opt_in</td>
-          <td class="col-duration">2.19</td>
-          <td class="col-time">2022-10-25 10:46:18.321734</td></tr>
+          <td class="col-duration">3.82</td>
+          <td class="col-time">2022-10-26 00:51:32.356104</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -----------------------------Captured stderr setup------------------------------ <br/>[test_contract.py:252 -          debug_print() ] Class configuration:
-{&#x27;event_end_since_test_start_s&#x27;: 10,
- &#x27;payout_time_s&#x27;: 10,
- &#x27;session_start_s&#x27;: 1666694596.3334296}
-[test_contract.py:221 -             app_addr() ] Creating the application...
-[test_contract.py:223 -             app_addr() ] Created app with id: 22 and address: XCBZ6NAEUP7AWAX3A4YFMTCEIABHPM57HMHLCUOJKYDP7HY3LQU32TOIPU in tx: T3P2UNOC4EXTHIZ66A4DWK2KEQKONEP2F2DIGALHTK2Z3YSE3YUA
-[test_contract.py:225 -             app_addr() ] Setting up the application...
-[test_contract.py:234 -             app_addr() ] Setup requested with transaction: IUNRVU43JGC5LFXRYJ7QGUHG35OPN4YABXQVHQH7QW5AK7LZ2GIA.
-Current app state: {&#x27;counter_opt_0&#x27;: 0, &#x27;event_timestamp&#x27;: 1666694758, &#x27;counter_opt_1&#x27;: 0, &#x27;event_result&#x27;: 99, &#x27;manager&#x27;: &#x27;d38aed48d6abd435d8f294fbd63f3cf32f62937fcd94bdd3f0fad48749fdafbc&#x27;, &#x27;winning_payout&#x27;: 0, &#x27;bet_amount&#x27;: 140000, &#x27;counter_opt_2&#x27;: 0, &#x27;oracle_addr&#x27;: &#x27;9efd1af3d048505043296c39cc2ccabe1d605485be8f204e64ce515a0b05c86c&#x27;, &#x27;winning_count&#x27;: 0, &#x27;payout_time_window_s&#x27;: 10, &#x27;stake_amount&#x27;: 0}
-[test_contract.py:240 -             app_addr() ] Funded XCBZ6NAEUP7AWAX3A4YFMTCEIABHPM57HMHLCUOJKYDP7HY3LQU32TOIPU with 200000microAlgos
-<br/> -------------------------------Captured log setup------------------------------- <br/>DEBUG    test.conftest:test_contract.py:252 Class configuration:
-{&#x27;event_end_since_test_start_s&#x27;: 10,
- &#x27;payout_time_s&#x27;: 10,
- &#x27;session_start_s&#x27;: 1666694596.3334296}
-DEBUG    test.conftest:test_contract.py:221 Creating the application...
-DEBUG    test.conftest:test_contract.py:223 Created app with id: 22 and address: XCBZ6NAEUP7AWAX3A4YFMTCEIABHPM57HMHLCUOJKYDP7HY3LQU32TOIPU in tx: T3P2UNOC4EXTHIZ66A4DWK2KEQKONEP2F2DIGALHTK2Z3YSE3YUA
-DEBUG    test.conftest:test_contract.py:225 Setting up the application...
-DEBUG    test.conftest:test_contract.py:234 Setup requested with transaction: IUNRVU43JGC5LFXRYJ7QGUHG35OPN4YABXQVHQH7QW5AK7LZ2GIA.
-Current app state: {&#x27;counter_opt_0&#x27;: 0, &#x27;event_timestamp&#x27;: 1666694758, &#x27;counter_opt_1&#x27;: 0, &#x27;event_result&#x27;: 99, &#x27;manager&#x27;: &#x27;d38aed48d6abd435d8f294fbd63f3cf32f62937fcd94bdd3f0fad48749fdafbc&#x27;, &#x27;winning_payout&#x27;: 0, &#x27;bet_amount&#x27;: 140000, &#x27;counter_opt_2&#x27;: 0, &#x27;oracle_addr&#x27;: &#x27;9efd1af3d048505043296c39cc2ccabe1d605485be8f204e64ce515a0b05c86c&#x27;, &#x27;winning_count&#x27;: 0, &#x27;payout_time_window_s&#x27;: 10, &#x27;stake_amount&#x27;: 0}
-DEBUG    test.conftest:test_contract.py:240 Funded XCBZ6NAEUP7AWAX3A4YFMTCEIABHPM57HMHLCUOJKYDP7HY3LQU32TOIPU with 200000microAlgos<br/></div></td></tr></tbody>
+            <div class="log"> -----------------------------Captured stderr setup------------------------------ <br/>[test_contract.py:222 -          debug_print() ] Class configuration:
+{&#x27;event_end_since_test_start_s&#x27;: 15,
+ &#x27;payout_time_s&#x27;: 15,
+ &#x27;session_start_s&#x27;: 1666745347.8061981}
+[test_contract.py:192 -             app_addr() ] Creating the application...
+[test_contract.py:194 -             app_addr() ] Created app with id: 33 and address: TBXCKFOFZWMTTB3MJOZGECCJDIGIJW2E3QTLJV2SP5GOGEPTOZY4UH562M in tx: R23MPGOJEUAHQCYYRNKO3A3VA4QPPVNNIE5ZKFZTTI47TGIL62FA
+[test_contract.py:196 -             app_addr() ] Setting up the application...
+[test_contract.py:204 -             app_addr() ] Setup requested with transaction: Q53CXKIIDLZX32UZG7KTNSOQ4YWUXSGE3WXYI3MFPYE66ACKZHLQ.
+Current app state: {&#x27;counter_opt_0&#x27;: 0, &#x27;event_result&#x27;: 99, &#x27;bet_amount&#x27;: 140000, &#x27;counter_opt_1&#x27;: 0, &#x27;oracle_addr&#x27;: &#x27;a7c48a663dc2a3f992e9d43b1ecaf1fafb05b51530e5d4531100d087b1b35d07&#x27;, &#x27;winning_count&#x27;: 0, &#x27;manager&#x27;: &#x27;d1af02c8440d311f3a418b3dd034d5a0590facbf40c86608517cdb9d350b571b&#x27;, &#x27;event_timestamp&#x27;: 1666745457, &#x27;payout_time_window_s&#x27;: 15, &#x27;counter_opt_2&#x27;: 0, &#x27;stake_amount&#x27;: 0, &#x27;winning_payout&#x27;: 0}
+[test_contract.py:210 -             app_addr() ] Funded TBXCKFOFZWMTTB3MJOZGECCJDIGIJW2E3QTLJV2SP5GOGEPTOZY4UH562M with 200000microAlgos
+<br/> -------------------------------Captured log setup------------------------------- <br/>DEBUG    test.conftest:test_contract.py:222 Class configuration:
+{&#x27;event_end_since_test_start_s&#x27;: 15,
+ &#x27;payout_time_s&#x27;: 15,
+ &#x27;session_start_s&#x27;: 1666745347.8061981}
+DEBUG    test.conftest:test_contract.py:192 Creating the application...
+DEBUG    test.conftest:test_contract.py:194 Created app with id: 33 and address: TBXCKFOFZWMTTB3MJOZGECCJDIGIJW2E3QTLJV2SP5GOGEPTOZY4UH562M in tx: R23MPGOJEUAHQCYYRNKO3A3VA4QPPVNNIE5ZKFZTTI47TGIL62FA
+DEBUG    test.conftest:test_contract.py:196 Setting up the application...
+DEBUG    test.conftest:test_contract.py:204 Setup requested with transaction: Q53CXKIIDLZX32UZG7KTNSOQ4YWUXSGE3WXYI3MFPYE66ACKZHLQ.
+Current app state: {&#x27;counter_opt_0&#x27;: 0, &#x27;event_result&#x27;: 99, &#x27;bet_amount&#x27;: 140000, &#x27;counter_opt_1&#x27;: 0, &#x27;oracle_addr&#x27;: &#x27;a7c48a663dc2a3f992e9d43b1ecaf1fafb05b51530e5d4531100d087b1b35d07&#x27;, &#x27;winning_count&#x27;: 0, &#x27;manager&#x27;: &#x27;d1af02c8440d311f3a418b3dd034d5a0590facbf40c86608517cdb9d350b571b&#x27;, &#x27;event_timestamp&#x27;: 1666745457, &#x27;payout_time_window_s&#x27;: 15, &#x27;counter_opt_2&#x27;: 0, &#x27;stake_amount&#x27;: 0, &#x27;winning_payout&#x27;: 0}
+DEBUG    test.conftest:test_contract.py:210 Funded TBXCKFOFZWMTTB3MJOZGECCJDIGIJW2E3QTLJV2SP5GOGEPTOZY4UH562M with 200000microAlgos<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_make_bet_wrong_stack</td>
-          <td class="col-duration">0.09</td>
-          <td class="col-time">2022-10-25 10:46:18.321778</td></tr>
+          <td class="col-duration">0.26</td>
+          <td class="col-time">2022-10-26 00:51:32.356146</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -467,8 +462,8 @@ DEBUG    test.conftest:test_contract.py:240 Funded XCBZ6NAEUP7AWAX3A4YFMTCEIABHP
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_make_bet_wrong_option</td>
-          <td class="col-duration">0.09</td>
-          <td class="col-time">2022-10-25 10:46:18.321822</td></tr>
+          <td class="col-duration">0.22</td>
+          <td class="col-time">2022-10-26 00:51:32.356187</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -476,8 +471,8 @@ DEBUG    test.conftest:test_contract.py:240 Funded XCBZ6NAEUP7AWAX3A4YFMTCEIABHP
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_make_bets</td>
-          <td class="col-duration">0.61</td>
-          <td class="col-time">2022-10-25 10:46:18.321885</td></tr>
+          <td class="col-duration">0.83</td>
+          <td class="col-time">2022-10-26 00:51:32.356226</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -485,8 +480,8 @@ DEBUG    test.conftest:test_contract.py:240 Funded XCBZ6NAEUP7AWAX3A4YFMTCEIABHP
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_make_bets_twice</td>
-          <td class="col-duration">0.13</td>
-          <td class="col-time">2022-10-25 10:46:18.321927</td></tr>
+          <td class="col-duration">0.09</td>
+          <td class="col-time">2022-10-26 00:51:32.356265</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -495,7 +490,7 @@ DEBUG    test.conftest:test_contract.py:240 Funded XCBZ6NAEUP7AWAX3A4YFMTCEIABHP
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_request_payout_before_event_end</td>
           <td class="col-duration">0.00</td>
-          <td class="col-time">2022-10-25 10:46:18.321968</td></tr>
+          <td class="col-time">2022-10-26 00:51:32.356304</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -504,7 +499,7 @@ DEBUG    test.conftest:test_contract.py:240 Funded XCBZ6NAEUP7AWAX3A4YFMTCEIABHP
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_oracle_set_result_before_event_end</td>
           <td class="col-duration">0.00</td>
-          <td class="col-time">2022-10-25 10:46:18.322008</td></tr>
+          <td class="col-time">2022-10-26 00:51:32.356344</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -513,7 +508,7 @@ DEBUG    test.conftest:test_contract.py:240 Funded XCBZ6NAEUP7AWAX3A4YFMTCEIABHP
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_request_payout_before_event_results</td>
           <td class="col-duration">0.00</td>
-          <td class="col-time">2022-10-25 10:46:18.322048</td></tr>
+          <td class="col-time">2022-10-26 00:51:32.356383</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -521,28 +516,40 @@ DEBUG    test.conftest:test_contract.py:240 Funded XCBZ6NAEUP7AWAX3A4YFMTCEIABHP
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_oracle_set_result_after_event_end</td>
-          <td class="col-duration">9.27</td>
-          <td class="col-time">2022-10-25 10:46:18.322149</td></tr>
+          <td class="col-duration">16.94</td>
+          <td class="col-time">2022-10-26 00:51:32.356483</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:71 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
-[test_contract.py:71 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
-[test_contract.py:71 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
-[test_contract.py:71 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
-[test_contract.py:71 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
-[test_contract.py:71 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
-<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_contract.py:71 Waiting for a time in which payout is allowed.
-DEBUG    test.conftest:test_contract.py:71 Waiting for a time in which payout is allowed.
-DEBUG    test.conftest:test_contract.py:71 Waiting for a time in which payout is allowed.
-DEBUG    test.conftest:test_contract.py:71 Waiting for a time in which payout is allowed.
-DEBUG    test.conftest:test_contract.py:71 Waiting for a time in which payout is allowed.
-DEBUG    test.conftest:test_contract.py:71 Waiting for a time in which payout is allowed.<br/></div></td></tr></tbody>
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.
+DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.
+DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.
+DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.
+DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.
+DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.
+DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.
+DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.
+DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.
+DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.
+DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.
+DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_request_payout_looser</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-time">2022-10-25 10:46:18.322194</td></tr>
+          <td class="col-duration">0.04</td>
+          <td class="col-time">2022-10-26 00:51:32.356527</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -550,8 +557,8 @@ DEBUG    test.conftest:test_contract.py:71 Waiting for a time in which payout is
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_request_payout_winners</td>
-          <td class="col-duration">0.36</td>
-          <td class="col-time">2022-10-25 10:46:18.322236</td></tr>
+          <td class="col-duration">0.32</td>
+          <td class="col-time">2022-10-26 00:51:32.356568</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -559,8 +566,8 @@ DEBUG    test.conftest:test_contract.py:71 Waiting for a time in which payout is
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_request_payout_winners_again</td>
-          <td class="col-duration">0.09</td>
-          <td class="col-time">2022-10-25 10:46:18.322277</td></tr>
+          <td class="col-duration">0.05</td>
+          <td class="col-time">2022-10-26 00:51:32.356608</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -569,7 +576,7 @@ DEBUG    test.conftest:test_contract.py:71 Waiting for a time in which payout is
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_request_deletion_before_payout_time</td>
           <td class="col-duration">0.00</td>
-          <td class="col-time">2022-10-25 10:46:18.322319</td></tr>
+          <td class="col-time">2022-10-26 00:51:32.356648</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -577,11 +584,14 @@ DEBUG    test.conftest:test_contract.py:71 Waiting for a time in which payout is
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractFlow::test_request_deletion_after_payout_time</td>
-          <td class="col-duration">10.31</td>
-          <td class="col-time">2022-10-25 10:46:18.322374</td></tr>
+          <td class="col-duration">14.79</td>
+          <td class="col-time">2022-10-26 00:51:32.356703</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:92 - _safe_wait_to_delete() ] Waiting for a time in which app deletion is allowed.
+[test_contract.py:92 - _safe_wait_to_delete() ] Waiting for a time in which app deletion is allowed.
+[test_contract.py:92 - _safe_wait_to_delete() ] Waiting for a time in which app deletion is allowed.
+[test_contract.py:92 - _safe_wait_to_delete() ] Waiting for a time in which app deletion is allowed.
 [test_contract.py:92 - _safe_wait_to_delete() ] Waiting for a time in which app deletion is allowed.
 [test_contract.py:92 - _safe_wait_to_delete() ] Waiting for a time in which app deletion is allowed.
 [test_contract.py:92 - _safe_wait_to_delete() ] Waiting for a time in which app deletion is allowed.
@@ -594,41 +604,44 @@ DEBUG    test.conftest:test_contract.py:92 Waiting for a time in which app delet
 DEBUG    test.conftest:test_contract.py:92 Waiting for a time in which app deletion is allowed.
 DEBUG    test.conftest:test_contract.py:92 Waiting for a time in which app deletion is allowed.
 DEBUG    test.conftest:test_contract.py:92 Waiting for a time in which app deletion is allowed.
+DEBUG    test.conftest:test_contract.py:92 Waiting for a time in which app deletion is allowed.
+DEBUG    test.conftest:test_contract.py:92 Waiting for a time in which app deletion is allowed.
+DEBUG    test.conftest:test_contract.py:92 Waiting for a time in which app deletion is allowed.
 DEBUG    test.conftest:test_contract.py:92 Waiting for a time in which app deletion is allowed.<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractNoWinners::test_participants_opt_in</td>
-          <td class="col-duration">2.15</td>
-          <td class="col-time">2022-10-25 10:46:18.322434</td></tr>
+          <td class="col-duration">3.39</td>
+          <td class="col-time">2022-10-26 00:51:32.356760</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -----------------------------Captured stderr setup------------------------------ <br/>[test_contract.py:252 -          debug_print() ] Class configuration:
+            <div class="log"> -----------------------------Captured stderr setup------------------------------ <br/>[test_contract.py:222 -          debug_print() ] Class configuration:
 {&#x27;event_end_since_test_start_s&#x27;: 2,
- &#x27;payout_time_s&#x27;: 2,
- &#x27;session_start_s&#x27;: 1666694737.2399006}
-[test_contract.py:221 -             app_addr() ] Creating the application...
-[test_contract.py:223 -             app_addr() ] Created app with id: 56 and address: KIPEA3E6SNE7QRL36KUJ5CVNW4P4F2JFZZ5O4I7FENFCZIYMKOPSGMKFBY in tx: 7E3NDLL6NLL52BVVJJ3UVP5HFXARIDSZS44AHIKWH5DZPMI4EDMQ
-[test_contract.py:225 -             app_addr() ] Setting up the application...
-[test_contract.py:234 -             app_addr() ] Setup requested with transaction: ULRO63WA25FU4D3JJRSS7HWW6BKB4DQM6E3WNZ6TO7DCLRWUOKZA.
-Current app state: {&#x27;bet_amount&#x27;: 140000, &#x27;event_timestamp&#x27;: 1666694773, &#x27;counter_opt_1&#x27;: 0, &#x27;event_result&#x27;: 99, &#x27;counter_opt_2&#x27;: 0, &#x27;stake_amount&#x27;: 0, &#x27;counter_opt_0&#x27;: 0, &#x27;winning_count&#x27;: 0, &#x27;payout_time_window_s&#x27;: 2, &#x27;winning_payout&#x27;: 0, &#x27;oracle_addr&#x27;: &#x27;9efd1af3d048505043296c39cc2ccabe1d605485be8f204e64ce515a0b05c86c&#x27;, &#x27;manager&#x27;: &#x27;d38aed48d6abd435d8f294fbd63f3cf32f62937fcd94bdd3f0fad48749fdafbc&#x27;}
-[test_contract.py:240 -             app_addr() ] Funded KIPEA3E6SNE7QRL36KUJ5CVNW4P4F2JFZZ5O4I7FENFCZIYMKOPSGMKFBY with 200000microAlgos
-<br/> -------------------------------Captured log setup------------------------------- <br/>DEBUG    test.conftest:test_contract.py:252 Class configuration:
+ &#x27;payout_time_s&#x27;: 3,
+ &#x27;session_start_s&#x27;: 1666745428.7173853}
+[test_contract.py:192 -             app_addr() ] Creating the application...
+[test_contract.py:194 -             app_addr() ] Created app with id: 91 and address: RPNAVZV2XL7Z54ZTZGQMNXYW6A5KNSAXEUJMHQHIEZYOKFZIALNHSK5J3A in tx: D32FEMZO3WNXW736KSHGREPOERWQZDERSYSUMSZGGKI2F6SLCQ6Q
+[test_contract.py:196 -             app_addr() ] Setting up the application...
+[test_contract.py:204 -             app_addr() ] Setup requested with transaction: XC7F4BH3AT5D7RPT34PWXWUELUVKHMPZDII6FHY363UXEXYI5PEQ.
+Current app state: {&#x27;counter_opt_0&#x27;: 0, &#x27;counter_opt_1&#x27;: 0, &#x27;event_timestamp&#x27;: 1666745481, &#x27;bet_amount&#x27;: 140000, &#x27;manager&#x27;: &#x27;d1af02c8440d311f3a418b3dd034d5a0590facbf40c86608517cdb9d350b571b&#x27;, &#x27;winning_count&#x27;: 0, &#x27;oracle_addr&#x27;: &#x27;a7c48a663dc2a3f992e9d43b1ecaf1fafb05b51530e5d4531100d087b1b35d07&#x27;, &#x27;counter_opt_2&#x27;: 0, &#x27;stake_amount&#x27;: 0, &#x27;event_result&#x27;: 99, &#x27;payout_time_window_s&#x27;: 3, &#x27;winning_payout&#x27;: 0}
+[test_contract.py:210 -             app_addr() ] Funded RPNAVZV2XL7Z54ZTZGQMNXYW6A5KNSAXEUJMHQHIEZYOKFZIALNHSK5J3A with 200000microAlgos
+<br/> -------------------------------Captured log setup------------------------------- <br/>DEBUG    test.conftest:test_contract.py:222 Class configuration:
 {&#x27;event_end_since_test_start_s&#x27;: 2,
- &#x27;payout_time_s&#x27;: 2,
- &#x27;session_start_s&#x27;: 1666694737.2399006}
-DEBUG    test.conftest:test_contract.py:221 Creating the application...
-DEBUG    test.conftest:test_contract.py:223 Created app with id: 56 and address: KIPEA3E6SNE7QRL36KUJ5CVNW4P4F2JFZZ5O4I7FENFCZIYMKOPSGMKFBY in tx: 7E3NDLL6NLL52BVVJJ3UVP5HFXARIDSZS44AHIKWH5DZPMI4EDMQ
-DEBUG    test.conftest:test_contract.py:225 Setting up the application...
-DEBUG    test.conftest:test_contract.py:234 Setup requested with transaction: ULRO63WA25FU4D3JJRSS7HWW6BKB4DQM6E3WNZ6TO7DCLRWUOKZA.
-Current app state: {&#x27;bet_amount&#x27;: 140000, &#x27;event_timestamp&#x27;: 1666694773, &#x27;counter_opt_1&#x27;: 0, &#x27;event_result&#x27;: 99, &#x27;counter_opt_2&#x27;: 0, &#x27;stake_amount&#x27;: 0, &#x27;counter_opt_0&#x27;: 0, &#x27;winning_count&#x27;: 0, &#x27;payout_time_window_s&#x27;: 2, &#x27;winning_payout&#x27;: 0, &#x27;oracle_addr&#x27;: &#x27;9efd1af3d048505043296c39cc2ccabe1d605485be8f204e64ce515a0b05c86c&#x27;, &#x27;manager&#x27;: &#x27;d38aed48d6abd435d8f294fbd63f3cf32f62937fcd94bdd3f0fad48749fdafbc&#x27;}
-DEBUG    test.conftest:test_contract.py:240 Funded KIPEA3E6SNE7QRL36KUJ5CVNW4P4F2JFZZ5O4I7FENFCZIYMKOPSGMKFBY with 200000microAlgos<br/></div></td></tr></tbody>
+ &#x27;payout_time_s&#x27;: 3,
+ &#x27;session_start_s&#x27;: 1666745428.7173853}
+DEBUG    test.conftest:test_contract.py:192 Creating the application...
+DEBUG    test.conftest:test_contract.py:194 Created app with id: 91 and address: RPNAVZV2XL7Z54ZTZGQMNXYW6A5KNSAXEUJMHQHIEZYOKFZIALNHSK5J3A in tx: D32FEMZO3WNXW736KSHGREPOERWQZDERSYSUMSZGGKI2F6SLCQ6Q
+DEBUG    test.conftest:test_contract.py:196 Setting up the application...
+DEBUG    test.conftest:test_contract.py:204 Setup requested with transaction: XC7F4BH3AT5D7RPT34PWXWUELUVKHMPZDII6FHY363UXEXYI5PEQ.
+Current app state: {&#x27;counter_opt_0&#x27;: 0, &#x27;counter_opt_1&#x27;: 0, &#x27;event_timestamp&#x27;: 1666745481, &#x27;bet_amount&#x27;: 140000, &#x27;manager&#x27;: &#x27;d1af02c8440d311f3a418b3dd034d5a0590facbf40c86608517cdb9d350b571b&#x27;, &#x27;winning_count&#x27;: 0, &#x27;oracle_addr&#x27;: &#x27;a7c48a663dc2a3f992e9d43b1ecaf1fafb05b51530e5d4531100d087b1b35d07&#x27;, &#x27;counter_opt_2&#x27;: 0, &#x27;stake_amount&#x27;: 0, &#x27;event_result&#x27;: 99, &#x27;payout_time_window_s&#x27;: 3, &#x27;winning_payout&#x27;: 0}
+DEBUG    test.conftest:test_contract.py:210 Funded RPNAVZV2XL7Z54ZTZGQMNXYW6A5KNSAXEUJMHQHIEZYOKFZIALNHSK5J3A with 200000microAlgos<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractNoWinners::test_make_bets</td>
-          <td class="col-duration">0.55</td>
-          <td class="col-time">2022-10-25 10:46:18.322476</td></tr>
+          <td class="col-duration">0.59</td>
+          <td class="col-time">2022-10-26 00:51:32.356800</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -636,17 +649,18 @@ DEBUG    test.conftest:test_contract.py:240 Funded KIPEA3E6SNE7QRL36KUJ5CVNW4P4F
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractNoWinners::test_oracle_set_result_after_event_end</td>
-          <td class="col-duration">2.37</td>
-          <td class="col-time">2022-10-25 10:46:18.322516</td></tr>
+          <td class="col-duration">4.46</td>
+          <td class="col-time">2022-10-26 00:51:32.356848</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_contract.py:67 - _safe_wait_to_payout() ] Waiting for a time in which payout is allowed.
+<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_contract.py:67 Waiting for a time in which payout is allowed.<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractNoWinners::test_request_payout_winners</td>
-          <td class="col-duration">0.14</td>
-          <td class="col-time">2022-10-25 10:46:18.322556</td></tr>
+          <td class="col-duration">0.10</td>
+          <td class="col-time">2022-10-26 00:51:32.356889</td></tr>
         <tr>
           <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
@@ -654,13 +668,31 @@ DEBUG    test.conftest:test_contract.py:240 Funded KIPEA3E6SNE7QRL36KUJ5CVNW4P4F
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">test_contract.py::TestContractNoWinners::test_request_deletion_after_payout_time</td>
-          <td class="col-duration">3.06</td>
-          <td class="col-time">2022-10-25 10:46:18.322610</td></tr>
+          <td class="col-duration">3.36</td>
+          <td class="col-time">2022-10-26 00:51:32.356928</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ----------------------------Captured stdout teardown---------------------------- <br/>
-Stopping sandbox containers...
-<br/> ----------------------------Captured stderr teardown---------------------------- <br/>[conftest.py:85 -        sandbox_setup() ] --sandbox argument provided -&gt; stopping the sandbox...
-Stopping algorand-sandbox-algod ... 
-Stopping algorand-sandbox-algod ... done
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_parent.py::TestParentContract::test_creation</td>
+          <td class="col-duration">1.58</td>
+          <td class="col-time">2022-10-26 00:51:32.356978</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -----------------------------Captured stderr setup------------------------------ <br/>[test_parent.py:45 -      parent_app_addr() ] Creating the application...
+[test_parent.py:47 -      parent_app_addr() ] Created parent app with id: 110 and address: 6EGTCADQ3DA5D74Y4NZYF6A3N6AQNRIPAXT57UORTUCR6J2PGDTBE5YXEU in tx: 6V44ZAL6YU6GKQ643OFYWZA6JMJQBGAGPTR5H5QOH4T2LISWUKJQ
+<br/> -------------------------------Captured log setup------------------------------- <br/>DEBUG    test.conftest:test_parent.py:45 Creating the application...
+DEBUG    test.conftest:test_parent.py:47 Created parent app with id: 110 and address: 6EGTCADQ3DA5D74Y4NZYF6A3N6AQNRIPAXT57UORTUCR6J2PGDTBE5YXEU in tx: 6V44ZAL6YU6GKQ643OFYWZA6JMJQBGAGPTR5H5QOH4T2LISWUKJQ<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_parent.py::TestParentContract::test_create_child</td>
+          <td class="col-duration">0.58</td>
+          <td class="col-time">2022-10-26 00:51:32.357034</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>[test_parent.py:107 -    test_create_child() ] Created child app with id: 113 using account 2GXQFSCEBUYR6OSBRM65ANGVUBMQ7LF7IDEGMCCRPTNZ2NILK4NYI75VAA
+<br/> -------------------------------Captured log call-------------------------------- <br/>DEBUG    test.conftest:test_parent.py:107 Created child app with id: 113 using account 2GXQFSCEBUYR6OSBRM65ANGVUBMQ7LF7IDEGMCCRPTNZ2NILK4NYI75VAA<br/> ----------------------------Captured stderr teardown---------------------------- <br/>[conftest.py:85 -        sandbox_setup() ] --sandbox argument provided -&gt; stopping the sandbox...
 <br/> -----------------------------Captured log teardown------------------------------ <br/>INFO     test.conftest:conftest.py:85 --sandbox argument provided -&gt; stopping the sandbox...<br/></div></td></tr></tbody></table></body></html>
