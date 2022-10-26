@@ -1,6 +1,6 @@
 #!/bin/sh
 cd src/test/sandbox || exit
-./sandbox up dev
+./sandbox up -v dev
 #./sandbox reset
 
 # Create additional_accounts, funding them from the main one
