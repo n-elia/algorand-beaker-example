@@ -100,6 +100,28 @@ Then, you will be able to run the demo script as explained in the previous subse
 
 ## How to: run tests over the smart contract
 
+### Make GitHub run the tests for you
+
+An automated GitHub Actions workflow is stored into `.github/workflows/tests.yml`. It contains two jobs, which will be
+run in parallel.
+\
+Both of them will:
+
+- set up an Ubuntu 22.04 environment
+- clone this repository and the sandbox submodule
+- install Python 3.10 and this project's dependencies
+- set up and run the sandbox
+
+Then, one will compile the smart contracts into TEAL code, while the other one will execute the tests using the Makefile
+in repository root.
+
+Both the jobs will upload some artifacts. The former will upload the TEAL code, while the latter will upload the test
+report. Artifacts are stored for 90 days.
+
+The workflow is executed on each push or pull request. However, you can request an execution manually, by going into
+the "Actions" tab, selecting "Smart contract tests" and clicking on "Run workflow". Then, you can monitor the execution
+and, at the end of the run, download the artifacts.
+
 ### Run tests using sandbox in dev configuration
 
 Tests are implemented using the `pytest` test framework for Python.
