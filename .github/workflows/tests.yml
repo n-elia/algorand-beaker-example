@@ -35,7 +35,8 @@ jobs:
 
       - name: Setup Algorand sandbox
         run: |
-          . src/test/sandbox-scripts/sandbox_setup.sh
+          cd src/test/sandbox
+          ./sandbox up -v
 
       - name: Compile contracts to TEAL code
         run: |
