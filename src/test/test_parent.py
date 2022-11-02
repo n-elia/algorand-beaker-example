@@ -72,6 +72,7 @@ class TestParentContract(TestParentContractBase):
         user_app_client.call(
             ChildApp.setup,
             oracle_addr=user_app_client.sender,
-            event_end_unix_timestamp=int(time.time()) + 2,
-            payout_time_window_s=0,
+            event_start_unix_timestamp=int(time.time()) + 30,
+            event_end_unix_timestamp=int(time.time()) + 60,
+            payout_time_window_s=60,
         )

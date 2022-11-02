@@ -20,7 +20,7 @@ from test import TestBase
 from test.conftest import logger
 
 # Block production time
-block_prod_time = 0 if cc.TEST_SANDBOX_CONFIG == "dev" else 5
+# block_prod_time = 0 if cc.TEST_SANDBOX_CONFIG == "dev" else 5
 
 
 # Workaround for https://github.com/algorand/go-algorand/issues/3192 .
@@ -49,14 +49,20 @@ class TestContractBase(TestBase):
     # Test configuration
     config = {
         "session_start_s": time.time(),  # Start time of test session
-        "event_end_since_test_start_s": 2,  # Time interval before event end
+        "event_start_since_test_start_s": 5,  # Time interval before event start
+        "event_end_since_test_start_s": 10,  # Time interval before event end
         "payout_time_s": 3  # Minimum time interval to allow payout
     }
 
     def _safe_to_payout(self):
         """ Return true if payout can be requested, according to creation parameters. """
         return time.time() > (
-                self.config["session_start_s"] + self.config["event_end_since_test_start_s"] + block_prod_time)
+                self.config["session_start_s"] + self.config["event_end_since_test_start_s"])
+
+    def _safe_to_bet(self):
+        """ Return true if event has not started, thus bets may be placed. """
+        return time.time() < (
+                self.config["session_start_s"] + self.config["event_start_since_test_start_s"])
 
     @pytest.fixture(scope="class")
     def safe_wait_to_payout(self, ping_sandbox):
@@ -77,11 +83,30 @@ class TestContractBase(TestBase):
 
         return _safe_wait_to_payout
 
+    @pytest.fixture(scope="class")
+    def safe_wait_to_event_end(self, ping_sandbox):
+        """Waits until event end time is reached. """
+
+        def _safe_wait_to_event_end():
+            while self._safe_to_bet():
+                logger.debug("Waiting for a time in which the event is already ended.")
+                # Workaround for https://github.com/algorand/go-algorand/issues/3192 .
+                ping_sandbox()
+                time.sleep(1)
+            # Summing the worst-case errors due to timestamp precision:
+            # - current time taken from host machine, with 1s precision
+            # - expiry timestamp given from host machine, with 1s precision
+            # - next timestamp given from sandbox and stored with 1s precision
+            time.sleep(3)
+            ping_sandbox()
+
+        return _safe_wait_to_event_end
+
     def _safe_to_delete(self):
         """ Return true if app can be deleted, according to creation parameters. """
         return time.time() > (
                 self.config["session_start_s"] + self.config["event_end_since_test_start_s"] +
-                self.config["payout_time_s"] + block_prod_time)
+                self.config["payout_time_s"])
 
     @pytest.fixture(scope="class")
     def safe_wait_to_delete(self, ping_sandbox):
@@ -157,15 +182,15 @@ class TestContractBase(TestBase):
 
     @pytest.fixture(scope="class")
     def participant_accounts(self, get_account) -> list[SandboxAccount]:
-        """Return a list of 3 accounts, fixed for the duration of a test class run."""
+        """Return a list of 4 accounts, fixed for the duration of a test class run."""
         accounts_list = []
-        for i in range(3):
+        for i in range(4):
             accounts_list.append(get_account())
         return accounts_list
 
     @pytest.fixture(scope="class")
     def participant_clients(self, creator_app_client, participant_accounts) -> list[ApplicationClient]:
-        """Return  list of 3 application clients, fixed for the duration of a test class run."""
+        """Return  list of 4 application clients, fixed for the duration of a test class run."""
         clients_list = []
         for a in participant_accounts:
             clients_list.append(creator_app_client.prepare(signer=a.signer))
@@ -197,6 +222,7 @@ class TestContractBase(TestBase):
         result = creator_app_client.call(
             App.setup,
             oracle_addr=oracle_account.address,  # Don't use oracle client before app creation
+            event_start_unix_timestamp=int(time.time() + self.config["event_start_since_test_start_s"]),
             event_end_unix_timestamp=int(time.time() + self.config["event_end_since_test_start_s"]),
             payout_time_window_s=self.config["payout_time_s"],
         )
@@ -384,6 +410,7 @@ class TestContractFlow(TestContractBase):
     # Test configuration
     config = {
         "session_start_s": time.time(),  # Start time of test session
+        "event_start_since_test_start_s": 5,  # Time interval before event start
         "event_end_since_test_start_s": 15,  # Time interval before event end
         "payout_time_s": 15  # Minimum time interval to allow payout
     }
@@ -492,6 +519,34 @@ class TestContractFlow(TestContractBase):
         )
 
         # Make a bet
+        with pytest.raises(LogicException):
+            c.call(
+                App.bet,  # noqa
+                bet_deposit_tx=bet_deposit_tx,
+                opt=2
+            )
+
+        balance_2 = creator_app_client.get_application_account_info()['amount']
+
+        assert balance_2 == balance_1
+
+    def test_make_bets_after_event_start(self, app_addr, creator_app_client, participant_clients, safe_wait_to_event_end):
+        balance_1 = creator_app_client.get_application_account_info()['amount']
+
+        c = participant_clients[3]
+
+        # TX for paying the bet quote
+        bet_deposit_tx = TransactionWithSigner(
+            txn=transaction.PaymentTxn(
+                c.get_sender(),
+                c.client.suggested_params(),
+                app_addr,
+                140 * consts.milli_algo),
+            signer=c.signer
+        )
+
+        # Make a bet after waiting a time in which the event end is reached
+        safe_wait_to_event_end()
         with pytest.raises(LogicException):
             c.call(
                 App.bet,  # noqa

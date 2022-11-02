@@ -1,15 +1,14 @@
-name: 'Compile TEAL'
+name: 'Smart contract tests'
 
-# **What it does**: Compiles the smart contracts into TEAL codes.
-# **Why we have it**: To make sure all smart contracts compile correctly.
-# **Who does it impact**: Saves the artifacts into `src/teal` directory.
+# **What it does**: Compiles the smart contracts into TEAL codes, and run tests.
+# **Why we have it**: To make sure all smart contracts compile and behave correctly.
 
 on:
   workflow_dispatch:
   push:
-    branches: [ $default-branch, dev ]
+    branches: [ main, dev ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ main, dev ]
 
 permissions:
   contents: write
@@ -35,7 +34,8 @@ jobs:
 
       - name: Setup Algorand sandbox
         run: |
-          . src/test/sandbox-scripts/sandbox_setup.sh
+          cd src/test/sandbox
+          ./sandbox up -v
 
       - name: Compile contracts to TEAL code
         run: |
