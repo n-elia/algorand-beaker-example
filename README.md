@@ -1,4 +1,4 @@
-[![Compile TEAL](https://github.com/n-elia/algorand-beaker-example/actions/workflows/tests.yml/badge.svg?branch=dev)](https://github.com/n-elia/algorand-beaker-example/actions/workflows/tests.yml)
+[![Compile TEAL](https://github.com/n-elia/algorand-beaker-example/actions/workflows/tests.yml/badge.svg)](https://github.com/n-elia/algorand-beaker-example/actions/workflows/tests.yml)
 
 # An Algorand smart contract example using Beaker
 
